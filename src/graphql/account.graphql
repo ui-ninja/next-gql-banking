@@ -1,0 +1,16 @@
+query getAccountById($accountId: Float!) {
+  account(id: $accountId) {
+    accountId
+    category
+    user {
+      id
+      name
+      phone
+      email
+    }
+  }
+}
+
+mutation AddAccount($newAccountData: NewAccountInput!) {
+  addAccount(newAccountData: $newAccountData)
+}

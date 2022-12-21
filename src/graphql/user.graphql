@@ -1,0 +1,27 @@
+query getUserById($userId: String!) {
+  user(id: $userId) {
+    id
+    name
+    email
+    phone
+    income
+    password
+    residence
+    occupation
+    govtId
+  }
+}
+
+mutation addUser($newUserData: NewUserInput!) {
+  addUser(newUserData: $newUserData) {
+    email
+    govtId
+    income
+    name
+    occupation
+    password
+    phone
+    residence
+    id
+  }
+}
