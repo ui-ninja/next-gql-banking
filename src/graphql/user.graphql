@@ -25,3 +25,10 @@ mutation addUser($newUserData: NewUserInput!) {
     id
   }
 }
+
+mutation login($loginData: LoginInput!) {
+  login(loginData: $loginData) {
+    email
+    password
+  }
+}

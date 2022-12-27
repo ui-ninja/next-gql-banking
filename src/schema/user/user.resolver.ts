@@ -1,5 +1,7 @@
 import { Resolver, Query, Arg, Mutation } from 'type-graphql';
-import { NewUserInput, User } from './user';
+import bcrypt from 'bcrypt';
+
+import { LoginInput, NewUserInput, User } from './user';
 
 import UserModel from '../../db/models/UserModel';
 
@@ -16,5 +18,23 @@ export class UserResolver {
     const newUser = new UserModel(newUserData);
     await newUser.save();
     return newUser;
+  }
+
+  @Mutation(() => User)
+  async login(
+    @Arg('loginData', { validate: false }) loginData: LoginInput
+  ): Promise<User> {
+    const user = await UserModel.find({ email: loginData.email });
+    if (!user[0]) {
+      throw new Error('user not found');
+    }
+    const comparePwd = await bcrypt.compare(
+      loginData.password,
+      user[0].password
+    );
+    if (!comparePwd) {
+      throw new Error('uername or password does not match');
+    }
+    return user[0];
   }
 }

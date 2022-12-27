@@ -11,6 +11,6 @@ query getAccountById($accountId: Float!) {
   }
 }
 
-mutation AddAccount($newAccountData: NewAccountInput!) {
+mutation addAccount($newAccountData: NewAccountInput!) {
   addAccount(newAccountData: $newAccountData)
 }

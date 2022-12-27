@@ -22,10 +22,16 @@ export type Account = {
   user: User;
 };
 
+export type LoginInput = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addAccount: Scalars['Float'];
   addUser: User;
+  login: User;
 };
 
 
@@ -36,6 +42,11 @@ export type MutationAddAccountArgs = {
 
 export type MutationAddUserArgs = {
   newUserData: NewUserInput;
+};
+
+
+export type MutationLoginArgs = {
+  loginData: LoginInput;
 };
 
 export type NewAccountInput = {
@@ -80,7 +91,7 @@ export type User = {
   occupation?: Maybe<Scalars['String']>;
   password: Scalars['String'];
   phone: Scalars['Float'];
-  residence: Scalars['String'];
+  residence?: Maybe<Scalars['String']>;
 };
 
 export type GetAccountByIdQueryVariables = Exact<{
@@ -102,14 +113,21 @@ export type GetUserByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetUserByIdQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string, email: string, phone: number, income?: number | null, password: string, residence: string, occupation?: string | null, govtId: string } };
+export type GetUserByIdQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string, email: string, phone: number, income?: number | null, password: string, residence?: string | null, occupation?: string | null, govtId: string } };
 
 export type AddUserMutationVariables = Exact<{
   newUserData: NewUserInput;
 }>;
 
 
-export type AddUserMutation = { __typename?: 'Mutation', addUser: { __typename?: 'User', email: string, govtId: string, income?: number | null, name: string, occupation?: string | null, password: string, phone: number, residence: string, id: string } };
+export type AddUserMutation = { __typename?: 'Mutation', addUser: { __typename?: 'User', email: string, govtId: string, income?: number | null, name: string, occupation?: string | null, password: string, phone: number, residence?: string | null, id: string } };
+
+export type LoginMutationVariables = Exact<{
+  loginData: LoginInput;
+}>;
+
+
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', email: string, password: string } };
 
 
 export const GetAccountByIdDocument = gql`
@@ -127,7 +145,7 @@ export const GetAccountByIdDocument = gql`
 }
     `;
 export const AddAccountDocument = gql`
-    mutation AddAccount($newAccountData: NewAccountInput!) {
+    mutation addAccount($newAccountData: NewAccountInput!) {
   addAccount(newAccountData: $newAccountData)
 }
     `;
@@ -161,6 +179,14 @@ export const AddUserDocument = gql`
   }
 }
     `;
+export const LoginDocument = gql`
+    mutation login($loginData: LoginInput!) {
+  login(loginData: $loginData) {
+    email
+    password
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -172,14 +198,17 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     getAccountById(variables: GetAccountByIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAccountByIdQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetAccountByIdQuery>(GetAccountByIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAccountById', 'query');
     },
-    AddAccount(variables: AddAccountMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AddAccountMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<AddAccountMutation>(AddAccountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AddAccount', 'mutation');
+    addAccount(variables: AddAccountMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AddAccountMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AddAccountMutation>(AddAccountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'addAccount', 'mutation');
     },
     getUserById(variables: GetUserByIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetUserByIdQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetUserByIdQuery>(GetUserByIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getUserById', 'query');
     },
     addUser(variables: AddUserMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AddUserMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<AddUserMutation>(AddUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'addUser', 'mutation');
+    },
+    login(variables: LoginMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<LoginMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<LoginMutation>(LoginDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'login', 'mutation');
     }
   };
 }

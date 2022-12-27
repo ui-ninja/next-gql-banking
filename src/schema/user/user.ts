@@ -15,7 +15,7 @@ export class User {
   @Field()
   phone!: number;
 
-  @Field()
+  @Field({ nullable: true })
   residence?: string;
 
   @Field({ nullable: true })
@@ -55,6 +55,15 @@ export class NewUserInput {
 
   @Field()
   govtId!: string;
+
+  @Field()
+  password!: string;
+}
+
+@InputType()
+export class LoginInput {
+  @Field()
+  email!: string;
 
   @Field()
   password!: string;

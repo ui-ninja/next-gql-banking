@@ -1,4 +1,4 @@
-import mongoose, { model, Schema } from 'mongoose';
+import mongoose, { model, models, Schema } from 'mongoose';
 
 const accountSchema = new Schema(
   {
@@ -18,6 +18,7 @@ const accountSchema = new Schema(
   }
 );
 
-const AccountModel = model('Account', accountSchema);
+// @ts-ignore
+const AccountModel = models.Account || model('Account', accountSchema);
 
 export default AccountModel;
