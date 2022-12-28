@@ -1,11 +1,10 @@
-query getUserById($userId: String!) {
-  user(id: $userId) {
+query getUser($emailAddress: String!) {
+  user(emailAddress: $emailAddress) {
     id
     name
     email
     phone
     income
-    password
     residence
     occupation
     govtId
@@ -19,16 +18,8 @@ mutation addUser($newUserData: NewUserInput!) {
     income
     name
     occupation
-    password
     phone
     residence
     id
-  }
-}
-
-mutation login($loginData: LoginInput!) {
-  login(loginData: $loginData) {
-    email
-    password
   }
 }

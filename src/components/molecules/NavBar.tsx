@@ -30,11 +30,11 @@ export default function NavBar() {
           </Link>
           <Link
             as={NextLink}
-            href={Routes.NEW_CREDIT_CARD}
+            href={Routes.OPEN_NEW_ACCOUNT}
             variant="secondary"
             ml={3}
           >
-            <Text fontSize="md">New Credit Card</Text>
+            <Text fontSize="md">Open new account</Text>
           </Link>
           <Button ml={3} variant="secondary" onClick={() => signOut()}>
             Sign out

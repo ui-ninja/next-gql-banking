@@ -16,6 +16,7 @@ export const theme = extendTheme({
       800: '#021949',
       900: '#00081e', // text
     },
+    'body-background': '#ebf2fb',
   },
   components: {
     Button,

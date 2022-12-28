@@ -1,7 +1,7 @@
 const Routes = {
   DASHBOARD: '/dashboard',
   TRANSACTIONS: '/transactions',
-  NEW_CREDIT_CARD: '/new-credit-card',
+  OPEN_NEW_ACCOUNT: '/open-new-account',
   LOGIN: '/auth/login',
   REGISTER: '/auth/register',
 };

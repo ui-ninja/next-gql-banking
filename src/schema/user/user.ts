@@ -26,9 +26,6 @@ export class User {
 
   @Field()
   govtId!: string;
-
-  @Field()
-  password!: string;
 }
 
 @InputType()
@@ -55,15 +52,6 @@ export class NewUserInput {
 
   @Field()
   govtId!: string;
-
-  @Field()
-  password!: string;
-}
-
-@InputType()
-export class LoginInput {
-  @Field()
-  email!: string;
 
   @Field()
   password!: string;

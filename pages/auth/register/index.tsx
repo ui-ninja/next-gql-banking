@@ -71,7 +71,7 @@ export default function Register() {
           });
 
           if (status?.ok) {
-            router.push(status?.url || Routes.DASHBOARD);
+            router.push(Routes.DASHBOARD);
           } else {
             throw new Error('Invalid username or password');
           }
@@ -221,7 +221,7 @@ export default function Register() {
                 {registerConstants.RESIDENCE_LABEL}
               </FormLabel>
               <Textarea
-                borderColor="gray.400"
+                borderColor="brand.900"
                 {...field}
                 placeholder={registerConstants.RESIDENCE_PLACEHOLDER}
               />

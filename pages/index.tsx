@@ -1,18 +1,91 @@
-import { dehydrate, useMutation } from 'react-query';
-import { getUserById, queryClient, addUser } from '../src/api';
-import { H1 } from '../src/components/atoms/typography';
+import { Box, Flex, Grid, GridItem } from '@chakra-ui/react';
+import { useSession } from 'next-auth/react';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 
-// export async function getServerSideProps() {
-//   await queryClient.prefetchQuery('user', () =>
-//     getUserById({ userId: '639d88a3e10ad82aa7c80699' })
-//   );
-//   return {
-//     props: {
-//       dehydratedState: dehydrate(queryClient),
-//     },
-//   };
-// }
+import Button from '../src/components/atoms/Button';
+import { H1, H3 } from '../src/components/atoms/typography';
+import FeatureCard from '../src/components/molecules/FeatureCard';
+
+import HomeConstants from '../src/constants/HomeConstants';
+import Routes from '../src/constants/routes';
 
 export default function Home() {
-  return <H1>Home</H1>;
+  const router = useRouter();
+  const { data: session } = useSession();
+
+  return (
+    <Box>
+      <Flex mb={10}>
+        <Image
+          src={'/hero.jpg'}
+          alt="Illustration of bank"
+          width="640"
+          height="425"
+        />
+        <Box>
+          <H1>Shop smart and safely with a NextGen choice account</H1>
+          <H3>
+            Open a NextGen account and get a Digi Card, with dynamic CVC that
+            refreshes every 24 hours.
+          </H3>
+          <Flex>
+            {session ? (
+              <>
+                <Button
+                  onClick={() => router.push(Routes.DASHBOARD)}
+                  mr="5"
+                  variant="primary"
+                  px={14}
+                >
+                  Dashboard
+                </Button>
+                <Button
+                  onClick={() => router.push(Routes.TRANSACTIONS)}
+                  variant="secondary"
+                  px={14}
+                >
+                  View all transactions
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  onClick={() => router.push(Routes.LOGIN)}
+                  mr="5"
+                  variant="primary"
+                  px={14}
+                >
+                  Login
+                </Button>
+                <Button
+                  onClick={() => router.push(Routes.REGISTER)}
+                  variant="secondary"
+                  px={14}
+                >
+                  Sign up
+                </Button>
+              </>
+            )}
+          </Flex>
+        </Box>
+      </Flex>
+
+      <Box>
+        <H1 textAlign="center">Much more with us!</H1>
+        <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+          {HomeConstants.featureCards.map((card) => (
+            <GridItem key={card.heading}>
+              <FeatureCard
+                heading={card.heading}
+                description={card.description}
+                link={card.link}
+                icon={card.icon}
+              />
+            </GridItem>
+          ))}
+        </Grid>
+      </Box>
+    </Box>
+  );
 }

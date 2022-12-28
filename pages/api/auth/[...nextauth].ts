@@ -1,4 +1,4 @@
-import NextAuth from 'next-auth';
+import NextAuth, { NextAuthOptions } from 'next-auth';
 import bcrypt from 'bcrypt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
@@ -6,26 +6,32 @@ import { connectDb } from '../../../src/db/config/connectDb';
 import UserModel from '../../../src/db/models/UserModel';
 
 import { LoginForm } from '../../../src/types';
+import { User } from '../../../src/generated/graphql';
 
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'credentials',
-      async authorize(credentials: LoginForm) {
+      //@ts-ignore
+      async authorize(creds: LoginForm) {
         try {
           connectDb();
-          const { email, password } = credentials;
-          const user = await UserModel.find({ email });
-          if (!user[0]) {
-            throw new Error(
+          const { email, password } = creds;
+          const user: (User & { password: string }) | null =
+            await UserModel.findOne({ email });
+
+          if (!user) {
+            console.log(
               'User with given credentials not found, please signup first.'
             );
+            return null;
           }
-          const comparePwd = await bcrypt.compare(password, user[0].password);
+          const comparePwd = await bcrypt.compare(password, user.password);
           if (!comparePwd) {
-            throw new Error('uername or password does not match');
+            console.log('uername or password does not match');
+            return null;
           }
-          return user[0];
+          return user;
         } catch (error) {
           console.log('error', error);
           return null;
@@ -33,10 +39,21 @@ export default NextAuth({
       },
     }),
   ],
+  callbacks: {
+    session: async ({ session, token }) => {
+      if (token && token.sub) {
+        delete session.user?.image;
+        session.user.userId = token?.sub;
+      }
+      return Promise.resolve(session);
+    },
+  },
   session: {
     strategy: 'jwt',
   },
   pages: {
     signIn: '/auth/login',
   },
-});
+};
+
+export default NextAuth(authOptions);

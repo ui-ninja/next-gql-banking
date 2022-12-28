@@ -13,7 +13,7 @@ const Select = forwardRef(
     return (
       <ChakraSelect
         ref={ref}
-        borderColor="gray.400"
+        borderColor="brand.900"
         borderRadius="12"
         {...props}
       >

@@ -8,7 +8,6 @@ import {
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { Controller, useForm } from 'react-hook-form';
-import { useMutation } from 'react-query';
 import { getCsrfToken, signIn } from 'next-auth/react';
 
 import { H1 } from '../../../src/components/atoms/typography';
@@ -20,13 +19,12 @@ import loginConstants from '../../../src/constants/loginConstants';
 
 import { LoginForm } from '../../../src/types';
 
-import { login } from '../../../src/api';
 import Routes from '../../../src/constants/routes';
 
 export async function getServerSideProps(context: any) {
   const csrfToken = await getCsrfToken(context);
   return {
-    props: { csrfToken },
+    props: { csrfToken: csrfToken || null },
   };
 }
 
@@ -60,7 +58,7 @@ export default function Login({
     });
 
     if (status?.ok) {
-      router.push(status?.url || Routes.DASHBOARD);
+      router.push(Routes.DASHBOARD);
     } else {
       toast({
         title: 'Error occurred.',
