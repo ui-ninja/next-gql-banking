@@ -7,7 +7,7 @@ const gqlClient = new GraphQLClient(
   process.env.GRAPHQL_ENDPOINT || 'http://localhost:3000/qpi/graphql'
 );
 
-export const { getUser, getAccountById, addUser, addAccount } =
+export const { getUser, getAccountByUserId, addUser, addAccount } =
   getSdk(gqlClient);
 
 export const queryClient = new QueryClient({

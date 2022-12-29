@@ -17,14 +17,26 @@ export type Scalars = {
 
 export type Account = {
   __typename?: 'Account';
-  accountId: Scalars['Float'];
+  accountNumber: Scalars['Float'];
+  card: Card;
   category: Scalars['String'];
+  id: Scalars['ID'];
+  type: Scalars['String'];
   user: User;
+};
+
+export type Card = {
+  __typename?: 'Card';
+  cardNumber: Scalars['Float'];
+  cardType: Scalars['String'];
+  expiryMonth: Scalars['Float'];
+  expiryYear: Scalars['Float'];
+  id: Scalars['ID'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  addAccount: Scalars['Float'];
+  addAccount: Scalars['String'];
   addUser: User;
 };
 
@@ -40,6 +52,7 @@ export type MutationAddUserArgs = {
 
 export type NewAccountInput = {
   category: Scalars['String'];
+  type: Scalars['String'];
   userId: Scalars['String'];
 };
 
@@ -62,7 +75,7 @@ export type Query = {
 
 
 export type QueryAccountArgs = {
-  id: Scalars['Float'];
+  userId: Scalars['String'];
 };
 
 
@@ -82,19 +95,19 @@ export type User = {
   residence?: Maybe<Scalars['String']>;
 };
 
-export type GetAccountByIdQueryVariables = Exact<{
-  accountId: Scalars['Float'];
+export type GetAccountByUserIdQueryVariables = Exact<{
+  userId: Scalars['String'];
 }>;
 
 
-export type GetAccountByIdQuery = { __typename?: 'Query', account: { __typename?: 'Account', accountId: number, category: string, user: { __typename?: 'User', id: string, name: string, phone: number, email: string } } };
+export type GetAccountByUserIdQuery = { __typename?: 'Query', account: { __typename?: 'Account', id: string, accountNumber: number, type: string, category: string, user: { __typename?: 'User', id: string, govtId: string, email: string, income?: number | null, name: string, occupation?: string | null, phone: number, residence?: string | null }, card: { __typename?: 'Card', id: string, expiryYear: number, expiryMonth: number, cardType: string, cardNumber: number } } };
 
 export type AddAccountMutationVariables = Exact<{
   newAccountData: NewAccountInput;
 }>;
 
 
-export type AddAccountMutation = { __typename?: 'Mutation', addAccount: number };
+export type AddAccountMutation = { __typename?: 'Mutation', addAccount: string };
 
 export type GetUserQueryVariables = Exact<{
   emailAddress: Scalars['String'];
@@ -111,16 +124,29 @@ export type AddUserMutationVariables = Exact<{
 export type AddUserMutation = { __typename?: 'Mutation', addUser: { __typename?: 'User', email: string, govtId: string, income?: number | null, name: string, occupation?: string | null, phone: number, residence?: string | null, id: string } };
 
 
-export const GetAccountByIdDocument = gql`
-    query getAccountById($accountId: Float!) {
-  account(id: $accountId) {
-    accountId
+export const GetAccountByUserIdDocument = gql`
+    query getAccountByUserId($userId: String!) {
+  account(userId: $userId) {
+    id
+    accountNumber
+    type
     category
     user {
       id
-      name
-      phone
+      govtId
       email
+      income
+      name
+      occupation
+      phone
+      residence
+    }
+    card {
+      id
+      expiryYear
+      expiryMonth
+      cardType
+      cardNumber
     }
   }
 }
@@ -166,8 +192,8 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    getAccountById(variables: GetAccountByIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAccountByIdQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetAccountByIdQuery>(GetAccountByIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAccountById', 'query');
+    getAccountByUserId(variables: GetAccountByUserIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAccountByUserIdQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAccountByUserIdQuery>(GetAccountByUserIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAccountByUserId', 'query');
     },
     addAccount(variables: AddAccountMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AddAccountMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<AddAccountMutation>(AddAccountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'addAccount', 'mutation');

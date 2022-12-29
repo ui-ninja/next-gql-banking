@@ -2,14 +2,23 @@ import mongoose, { model, models, Schema } from 'mongoose';
 
 const accountSchema = new Schema(
   {
-    accountId: { type: Number, required: true, unique: true },
+    accountNumber: { type: Number, required: true, unique: true },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },
+    type: {
+      type: String,
+      required: true,
+    },
     category: {
       type: String,
+      required: true,
+    },
+    card: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Card',
       required: true,
     },
   },
@@ -18,7 +27,6 @@ const accountSchema = new Schema(
   }
 );
 
-// @ts-ignore
 const AccountModel = models.Account || model('Account', accountSchema);
 
 export default AccountModel;

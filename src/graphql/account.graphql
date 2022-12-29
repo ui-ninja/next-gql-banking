@@ -1,12 +1,25 @@
-query getAccountById($accountId: Float!) {
-  account(id: $accountId) {
-    accountId
+query getAccountByUserId($userId: String!) {
+  account(userId: $userId) {
+    id
+    accountNumber
+    type
     category
     user {
       id
-      name
-      phone
+      govtId
       email
+      income
+      name
+      occupation
+      phone
+      residence
+    }
+    card {
+      id
+      expiryYear
+      expiryMonth
+      cardType
+      cardNumber
     }
   }
 }
