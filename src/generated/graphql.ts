@@ -69,7 +69,7 @@ export type NewUserInput = {
 
 export type Query = {
   __typename?: 'Query';
-  account: Account;
+  account: Array<Account>;
   user: User;
 };
 
@@ -100,7 +100,7 @@ export type GetAccountByUserIdQueryVariables = Exact<{
 }>;
 
 
-export type GetAccountByUserIdQuery = { __typename?: 'Query', account: { __typename?: 'Account', id: string, accountNumber: number, type: string, category: string, user: { __typename?: 'User', id: string, govtId: string, email: string, income?: number | null, name: string, occupation?: string | null, phone: number, residence?: string | null }, card: { __typename?: 'Card', id: string, expiryYear: number, expiryMonth: number, cardType: string, cardNumber: number } } };
+export type GetAccountByUserIdQuery = { __typename?: 'Query', account: Array<{ __typename?: 'Account', id: string, accountNumber: number, type: string, category: string, user: { __typename?: 'User', id: string, govtId: string, email: string, income?: number | null, name: string, occupation?: string | null, phone: number, residence?: string | null }, card: { __typename?: 'Card', id: string, expiryYear: number, expiryMonth: number, cardType: string, cardNumber: number } }> };
 
 export type AddAccountMutationVariables = Exact<{
   newAccountData: NewAccountInput;

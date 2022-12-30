@@ -3,7 +3,6 @@ import {
   Divider,
   FormControl,
   FormErrorMessage,
-  FormHelperText,
   FormLabel,
   RadioGroup,
   Stack,
@@ -11,7 +10,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { GetServerSidePropsContext } from 'next';
-import { Session, unstable_getServerSession } from 'next-auth';
+import { unstable_getServerSession } from 'next-auth';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -19,7 +18,6 @@ import { dehydrate, useMutation, useQuery } from 'react-query';
 import { addAccount, getUser, queryClient } from '../../src/api';
 import Button from '../../src/components/atoms/Button';
 import Input from '../../src/components/atoms/Input';
-import Radio from '../../src/components/atoms/Radio';
 import Select from '../../src/components/atoms/Select';
 import { H1 } from '../../src/components/atoms/typography';
 import RadioCard from '../../src/components/molecules/RadioCard';
@@ -58,7 +56,7 @@ export default function OpenNewAccount({
 }: {
   emailAddress: string;
 }) {
-  const { data, isFetching, isError } = useQuery(['dogs'], () =>
+  const { data, isFetching, isError } = useQuery(['user'], () =>
     getUser({ emailAddress })
   );
 

@@ -19,7 +19,7 @@ export function H1({ children, ...props }: Props) {
 
 export function H2({ children, ...props }: Props) {
   return (
-    <Text as="h2" fontSize="2xl" my={5} {...props}>
+    <Text as="h2" fontSize="2xl" fontWeight={'semibold'} my={5} {...props}>
       {children}
     </Text>
   );
@@ -27,7 +27,7 @@ export function H2({ children, ...props }: Props) {
 
 export function H3({ children, ...props }: Props) {
   return (
-    <Text as="h3" fontSize="xl" my={4} {...props}>
+    <Text as="h3" fontSize="xl" fontWeight={'semibold'} my={4} {...props}>
       {children}
     </Text>
   );

@@ -9,11 +9,11 @@ import { Account, NewAccountInput } from './account';
 
 @Resolver(Account)
 export class AccountResolver {
-  @Query(() => Account)
-  async account(@Arg('userId') userId: string): Promise<Account> {
+  @Query(() => [Account])
+  async account(@Arg('userId') userId: string): Promise<Account[]> {
     try {
       const foundAccountDetails: PopulatedDoc<User & Document> =
-        await AccountModel.findOne({
+        await AccountModel.find({
           user: userId,
         })
           .populate('user')
@@ -21,7 +21,9 @@ export class AccountResolver {
           .orFail()
           .exec();
 
-      if (!foundAccountDetails) {
+      console.log('foundAccountDetails', foundAccountDetails);
+
+      if (!foundAccountDetails.length) {
         throw new Error('No account details found');
       }
 
