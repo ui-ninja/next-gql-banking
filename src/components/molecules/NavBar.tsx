@@ -22,14 +22,6 @@ export default function NavBar() {
           </Link>
           <Link
             as={NextLink}
-            href={Routes.TRANSACTIONS}
-            variant="secondary"
-            ml={3}
-          >
-            <Text fontSize="md">Transactions</Text>
-          </Link>
-          <Link
-            as={NextLink}
             href={Routes.OPEN_NEW_ACCOUNT}
             variant="secondary"
             ml={3}

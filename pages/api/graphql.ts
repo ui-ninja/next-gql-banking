@@ -9,11 +9,12 @@ import { buildSchema } from 'type-graphql';
 import { UserResolver } from '../../src/schema/user/user.resolver';
 import { AccountResolver } from '../../src/schema/account/account.resolver';
 import { connectDb } from '../../src/db/config/connectDb';
+import { TransactionsResolver } from '../../src/schema/transaction/transactions.resolver';
 
 connectDb();
 
 const schema = await buildSchema({
-  resolvers: [AccountResolver, UserResolver],
+  resolvers: [AccountResolver, UserResolver, TransactionsResolver],
 });
 
 const server = new ApolloServer({

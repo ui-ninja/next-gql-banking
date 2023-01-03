@@ -1,5 +1,4 @@
 import mongoose, { PopulatedDoc, Document } from 'mongoose';
-import bcrypt from 'bcrypt';
 import { Arg, Mutation, Query, Resolver } from 'type-graphql';
 import AccountModel from '../../db/models/AccountModel';
 import CardModel from '../../db/models/CardModel';

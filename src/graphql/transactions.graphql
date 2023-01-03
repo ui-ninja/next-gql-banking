@@ -1,0 +1,18 @@
+query Transactions($after: Float!, $first: Float!, $accountId: String!) {
+  transactions(after: $after, first: $first, accountId: $accountId) {
+    edges {
+      cursor
+      node {
+        id
+        accountId
+        createdAt
+        amount
+        type
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
+}

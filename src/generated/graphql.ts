@@ -34,6 +34,12 @@ export type Card = {
   id: Scalars['ID'];
 };
 
+export type Edge = {
+  __typename?: 'Edge';
+  cursor: Scalars['Float'];
+  node: Transaction;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addAccount: Scalars['String'];
@@ -67,9 +73,16 @@ export type NewUserInput = {
   residence?: InputMaybe<Scalars['String']>;
 };
 
+export type PageInfo = {
+  __typename?: 'PageInfo';
+  endCursor: Scalars['Float'];
+  hasNextPage: Scalars['Boolean'];
+};
+
 export type Query = {
   __typename?: 'Query';
   account: Array<Account>;
+  transactions: Transactions;
   user: User;
 };
 
@@ -79,8 +92,30 @@ export type QueryAccountArgs = {
 };
 
 
+export type QueryTransactionsArgs = {
+  accountId: Scalars['String'];
+  after: Scalars['Float'];
+  first: Scalars['Float'];
+};
+
+
 export type QueryUserArgs = {
   emailAddress: Scalars['String'];
+};
+
+export type Transaction = {
+  __typename?: 'Transaction';
+  accountId: Scalars['String'];
+  amount: Scalars['Float'];
+  createdAt: Scalars['String'];
+  id: Scalars['ID'];
+  type: Scalars['String'];
+};
+
+export type Transactions = {
+  __typename?: 'Transactions';
+  edges?: Maybe<Array<Edge>>;
+  pageInfo: PageInfo;
 };
 
 export type User = {
@@ -108,6 +143,15 @@ export type AddAccountMutationVariables = Exact<{
 
 
 export type AddAccountMutation = { __typename?: 'Mutation', addAccount: string };
+
+export type TransactionsQueryVariables = Exact<{
+  after: Scalars['Float'];
+  first: Scalars['Float'];
+  accountId: Scalars['String'];
+}>;
+
+
+export type TransactionsQuery = { __typename?: 'Query', transactions: { __typename?: 'Transactions', edges?: Array<{ __typename?: 'Edge', cursor: number, node: { __typename?: 'Transaction', id: string, accountId: string, createdAt: string, amount: number, type: string } }> | null, pageInfo: { __typename?: 'PageInfo', endCursor: number, hasNextPage: boolean } } };
 
 export type GetUserQueryVariables = Exact<{
   emailAddress: Scalars['String'];
@@ -156,6 +200,26 @@ export const AddAccountDocument = gql`
   addAccount(newAccountData: $newAccountData)
 }
     `;
+export const TransactionsDocument = gql`
+    query Transactions($after: Float!, $first: Float!, $accountId: String!) {
+  transactions(after: $after, first: $first, accountId: $accountId) {
+    edges {
+      cursor
+      node {
+        id
+        accountId
+        createdAt
+        amount
+        type
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
+}
+    `;
 export const GetUserDocument = gql`
     query getUser($emailAddress: String!) {
   user(emailAddress: $emailAddress) {
@@ -197,6 +261,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     addAccount(variables: AddAccountMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AddAccountMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<AddAccountMutation>(AddAccountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'addAccount', 'mutation');
+    },
+    Transactions(variables: TransactionsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<TransactionsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<TransactionsQuery>(TransactionsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Transactions', 'query');
     },
     getUser(variables: GetUserQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetUserQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetUserQuery>(GetUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getUser', 'query');
