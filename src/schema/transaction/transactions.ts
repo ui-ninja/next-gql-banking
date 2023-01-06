@@ -3,7 +3,7 @@ import { Field, ID, ObjectType } from 'type-graphql';
 @ObjectType()
 export class Transaction {
   @Field(() => ID)
-  id!: number;
+  id!: string;
 
   @Field()
   accountId!: string;
@@ -16,12 +16,15 @@ export class Transaction {
 
   @Field()
   amount!: number;
+
+  @Field()
+  rowNo!: number;
 }
 
 @ObjectType()
 export class Edge {
   @Field()
-  cursor!: number;
+  cursor!: string;
 
   @Field()
   node!: Transaction;
@@ -33,7 +36,7 @@ export class PageInfo {
   hasNextPage!: boolean;
 
   @Field()
-  endCursor!: number;
+  endCursor!: string;
 }
 
 @ObjectType()

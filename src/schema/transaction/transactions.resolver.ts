@@ -8,14 +8,28 @@ export class TransactionsResolver {
   async transactions(
     @Arg('accountId') accountId: string,
     @Arg('first') first: number,
-    @Arg('after') after: number
+    @Arg('after', { nullable: true }) after: string,
+    @Arg('before', { nullable: true }) before: string
   ): Promise<Transactions> {
     let results = null;
 
+    // first: 10, after: null
+
     // for edges
 
-    // when cursor viz. after is in request
-    if (after) {
+    // when cursor viz. after or before is in request
+    if (before) {
+      // find index of cursor and send next (first) items
+      const beforeItem = dummyTransactionData.findIndex(
+        (item) => item.id === before
+      );
+      // slice next first items from cursor
+      // this usually is taken care by database.
+      results = dummyTransactionData.slice(
+        beforeItem - first, // substract first n items in case of before
+        beforeItem
+      );
+    } else if (after) {
       // find index of cursor and send next (first) items
       const cursorItem = dummyTransactionData.findIndex(
         (item) => item.id === after
@@ -35,13 +49,14 @@ export class TransactionsResolver {
 
     if (results.length > 0) {
       const lastResultsItem = results[results.length - 1];
+
       // this will be the new cursor
       const endCursor = lastResultsItem.id;
 
       // this helps to determine if we have nextPage
       const secondQueryResult = dummyTransactionData.slice(
-        endCursor,
-        first + endCursor
+        lastResultsItem.rowNo,
+        first + lastResultsItem.rowNo
       );
 
       return {
@@ -58,7 +73,7 @@ export class TransactionsResolver {
       return {
         edges: [],
         pageInfo: {
-          endCursor: 0,
+          endCursor: '',
           hasNextPage: false,
         },
       };

@@ -36,7 +36,7 @@ export type Card = {
 
 export type Edge = {
   __typename?: 'Edge';
-  cursor: Scalars['Float'];
+  cursor: Scalars['String'];
   node: Transaction;
 };
 
@@ -75,7 +75,7 @@ export type NewUserInput = {
 
 export type PageInfo = {
   __typename?: 'PageInfo';
-  endCursor: Scalars['Float'];
+  endCursor: Scalars['String'];
   hasNextPage: Scalars['Boolean'];
 };
 
@@ -94,7 +94,8 @@ export type QueryAccountArgs = {
 
 export type QueryTransactionsArgs = {
   accountId: Scalars['String'];
-  after: Scalars['Float'];
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   first: Scalars['Float'];
 };
 
@@ -109,6 +110,7 @@ export type Transaction = {
   amount: Scalars['Float'];
   createdAt: Scalars['String'];
   id: Scalars['ID'];
+  rowNo: Scalars['Float'];
   type: Scalars['String'];
 };
 
@@ -145,13 +147,14 @@ export type AddAccountMutationVariables = Exact<{
 export type AddAccountMutation = { __typename?: 'Mutation', addAccount: string };
 
 export type TransactionsQueryVariables = Exact<{
-  after: Scalars['Float'];
   first: Scalars['Float'];
   accountId: Scalars['String'];
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type TransactionsQuery = { __typename?: 'Query', transactions: { __typename?: 'Transactions', edges: Array<{ __typename?: 'Edge', cursor: number, node: { __typename?: 'Transaction', id: string, accountId: string, createdAt: string, amount: number, type: string } }>, pageInfo: { __typename?: 'PageInfo', endCursor: number, hasNextPage: boolean } } };
+export type TransactionsQuery = { __typename?: 'Query', transactions: { __typename?: 'Transactions', edges: Array<{ __typename?: 'Edge', cursor: string, node: { __typename?: 'Transaction', id: string, type: string, createdAt: string, amount: number, accountId: string, rowNo: number } }>, pageInfo: { __typename?: 'PageInfo', endCursor: string, hasNextPage: boolean } } };
 
 export type GetUserQueryVariables = Exact<{
   emailAddress: Scalars['String'];
@@ -201,16 +204,22 @@ export const AddAccountDocument = gql`
 }
     `;
 export const TransactionsDocument = gql`
-    query transactions($after: Float!, $first: Float!, $accountId: String!) {
-  transactions(after: $after, first: $first, accountId: $accountId) {
+    query transactions($first: Float!, $accountId: String!, $after: String, $before: String) {
+  transactions(
+    first: $first
+    accountId: $accountId
+    after: $after
+    before: $before
+  ) {
     edges {
       cursor
       node {
         id
-        accountId
+        type
         createdAt
         amount
-        type
+        accountId
+        rowNo
       }
     }
     pageInfo {

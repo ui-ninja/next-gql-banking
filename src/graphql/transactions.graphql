@@ -1,13 +1,24 @@
-query transactions($after: Float!, $first: Float!, $accountId: String!) {
-  transactions(after: $after, first: $first, accountId: $accountId) {
+query transactions(
+  $first: Float!
+  $accountId: String!
+  $after: String
+  $before: String
+) {
+  transactions(
+    first: $first
+    accountId: $accountId
+    after: $after
+    before: $before
+  ) {
     edges {
       cursor
       node {
         id
-        accountId
+        type
         createdAt
         amount
-        type
+        accountId
+        rowNo
       }
     }
     pageInfo {

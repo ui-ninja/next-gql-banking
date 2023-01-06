@@ -37,7 +37,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   await queryClient.prefetchQuery('transactions', () =>
     transactions({
       accountId: context.query.accountId as string,
-      after: 0,
+      after: '',
+      before: '',
       first: PAGE_SIZE,
     })
   );
@@ -51,14 +52,21 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 function Transactions({ accountId }: { accountId: string }) {
-  const [activeCursor, setActiveCursor] = useState(0);
+  const [state, setState] = useState({
+    nextCursor: '',
+    previousCursor: '',
+    activePageNumber: 1,
+  });
 
-  const { data, isFetching, isError } = useQuery(
-    ['transactions', activeCursor],
+  const { nextCursor, activePageNumber, previousCursor } = state;
+
+  const { data, isLoading, isError } = useQuery(
+    ['transactions', nextCursor, previousCursor],
     () => {
       return transactions({
         accountId,
-        after: activeCursor,
+        after: nextCursor,
+        before: previousCursor,
         first: PAGE_SIZE,
       });
     },
@@ -67,13 +75,8 @@ function Transactions({ accountId }: { accountId: string }) {
     }
   );
 
-  if (isFetching) {
-    return (
-      <H1>
-        <Spinner mr={3} />
-        Getting your transactions...
-      </H1>
-    );
+  if (isLoading) {
+    return <H1>Loading results...</H1>;
   }
 
   if (isError || !data?.transactions) {
@@ -86,6 +89,22 @@ function Transactions({ accountId }: { accountId: string }) {
       edges,
     },
   } = data;
+
+  const handleNextPage = () => {
+    setState((prevState) => ({
+      activePageNumber: prevState.activePageNumber + 1,
+      nextCursor: endCursor,
+      previousCursor: '',
+    }));
+  };
+
+  const handlePreviousPage = () => {
+    setState((prevState) => ({
+      activePageNumber: prevState.activePageNumber - 1,
+      nextCursor: '',
+      previousCursor: edges[0].cursor,
+    }));
+  };
 
   return (
     <Box>
@@ -105,6 +124,7 @@ function Transactions({ accountId }: { accountId: string }) {
           <TableCaption>Transaction data (10 per page)</TableCaption>
           <Thead>
             <Tr>
+              <Th>S.no.</Th>
               <Th>Id</Th>
               <Th>Transaction done on</Th>
               <Th>Type</Th>
@@ -112,8 +132,9 @@ function Transactions({ accountId }: { accountId: string }) {
             </Tr>
           </Thead>
           <Tbody>
-            {edges.map(({ node: { id, createdAt, type, amount } }) => (
+            {edges.map(({ node: { id, createdAt, type, amount, rowNo } }) => (
               <Tr key={id}>
+                <Td>{rowNo}</Td>
                 <Td>{id}</Td>
                 <Td>{new Date(createdAt).toLocaleString()}</Td>
                 <Td>{type}</Td>
@@ -127,16 +148,16 @@ function Transactions({ accountId }: { accountId: string }) {
       <Center>
         <Button
           variant="primary"
-          disabled={activeCursor === 0}
-          onClick={() => setActiveCursor(activeCursor - PAGE_SIZE)}
+          disabled={activePageNumber === 1}
+          onClick={handlePreviousPage}
         >
           Prev.
         </Button>
-        <H4 mx={5}>Page {activeCursor / PAGE_SIZE + 1}</H4>
+        <H4 mx={5}>Page {activePageNumber}</H4>
         <Button
           variant="primary"
           disabled={!hasNextPage}
-          onClick={() => setActiveCursor(endCursor)}
+          onClick={handleNextPage}
         >
           Next
         </Button>
