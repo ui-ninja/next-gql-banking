@@ -20,15 +20,13 @@ export class AccountResolver {
           .orFail()
           .exec();
 
-      console.log('foundAccountDetails', foundAccountDetails);
-
       if (!foundAccountDetails.length) {
-        throw new Error('No account details found');
+        throw new Error('No account details found for given user id.');
       }
 
       return foundAccountDetails;
     } catch (error: any) {
-      throw new Error('Error while fetching account details', error);
+      throw new Error(error.message);
     }
   }
 

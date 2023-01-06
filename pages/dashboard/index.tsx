@@ -7,6 +7,7 @@ import { dehydrate, useQuery } from 'react-query';
 import { getAccountByUserId, queryClient } from '../../src/api';
 import { H1, H3, H4 } from '../../src/components/atoms/typography';
 import AccountCard from '../../src/components/molecules/AccountCard';
+import AddNewAccount from '../../src/components/molecules/AddNewAccoutCard';
 import PaymentCard from '../../src/components/molecules/PaymentCard';
 import Routes from '../../src/constants/routes';
 import { Account } from '../../src/generated/graphql';
@@ -37,17 +38,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default function Dashboard({ userId }: { userId: string }) {
-  const { data, isFetching, isError } = useQuery(['account'], () =>
+  const { data, isFetching, isError, error } = useQuery(['account'], () =>
     getAccountByUserId({ userId })
   );
 
   if (isError) {
-    return (
-      <H4>
-        Error while fetching dashboard details, please try again after some
-        time.
-      </H4>
-    );
+    return <H4>No account created yet, please add a new account.</H4>;
   }
 
   if (isFetching) {
@@ -83,29 +79,12 @@ export default function Dashboard({ userId }: { userId: string }) {
           overflowX="scroll"
           scrollSnapType={'x proximity'}
         >
-          <Link href={Routes.OPEN_NEW_ACCOUNT}>
-            <Flex
-              w="325px"
-              h="170px"
-              borderWidth={1}
-              borderColor="gray.300"
-              borderRadius={12}
-              py={5}
-              px={8}
-              mr={5}
-              flexDirection="column"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Icon as={BsFillPlusCircleFill} fontSize="3xl" />
-              <Text fontSize="2xl">Open new account</Text>
-            </Flex>
-          </Link>
+          <AddNewAccount />
           {data?.account.map((item) => {
             return (
               <AccountCard
                 key={item.accountNumber}
-                accountNumber={item.accountNumber}
+                id={item.id}
                 type={item.type}
                 category={item.category}
               />

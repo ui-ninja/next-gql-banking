@@ -7,7 +7,7 @@ export default function Main({ children }: { children: React.ReactElement }) {
       bgColor="body-background"
       as="main"
       minH={'calc(100vh - 154px)'}
-      p="4"
+      py="4"
       pb={14}
     >
       <Container maxW="container.xl">{children}</Container>

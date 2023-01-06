@@ -1,15 +1,22 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex, Icon, Text } from '@chakra-ui/react';
 import { signOut, useSession } from 'next-auth/react';
 import NextLink from 'next/link';
 import Routes from '../../constants/routes';
 import Button from '../atoms/Button';
 
 import Link from '../atoms/Link';
+import { MdLogout } from 'react-icons/md';
 
 export default function NavBar() {
   const { data: session } = useSession();
   return (
-    <Flex as="nav" flexGrow={1} justifyContent="flex-end" alignItems="center">
+    <Flex
+      as="nav"
+      flexGrow={1}
+      alignItems="center"
+      mt={[5, 5, 0]}
+      justifyContent={['center', 'center', 'flex-end']}
+    >
       {session ? (
         <>
           <Link
@@ -28,8 +35,13 @@ export default function NavBar() {
           >
             <Text fontSize="md">Open new account</Text>
           </Link>
-          <Button ml={3} variant="secondary" onClick={() => signOut()}>
-            Sign out
+          <Button
+            ml={3}
+            variant="secondary"
+            onClick={() => signOut()}
+            title="Sign out"
+          >
+            <Icon as={MdLogout} />
           </Button>
         </>
       ) : (

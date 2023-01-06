@@ -6,14 +6,14 @@ export default function Header() {
   return (
     <Box
       as="header"
-      p="4"
+      py="4"
       boxShadow="md"
       minH="77px"
       borderBottom="1px solid"
       borderColor="gray.300"
     >
       <Container maxW="container.xl">
-        <Flex>
+        <Flex flexWrap={['wrap', 'wrap', 'nowrap']}>
           <Logo />
           <NavBar />
         </Flex>

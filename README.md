@@ -8,9 +8,9 @@
 - [x] add new account - savings or credit card
 - [x] cursor based pagination on dummy transaction data
 - [x] dashboard design
+- [x] Responsive – Desktop, Tablet, Mobile
 - [ ] list transactions
 - [ ] sort transactions by date (last month, last 3 months and last 6 months)
 - [ ] modal to welcome new user
 - [ ] generic error page
-- [ ] Responsive – Desktop, Tablet, Mobile
 - [ ] Unit test – Jest, React testing library

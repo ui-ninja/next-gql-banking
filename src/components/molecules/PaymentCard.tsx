@@ -13,24 +13,30 @@ export default function PaymentCard({
   return (
     <Box
       pos="relative"
-      w="425px"
-      h="270px"
+      w={['315px', '315px', '385px']}
+      h={['180px', '180px', '230px']}
       textAlign="left"
-      p={30}
+      p={15}
       color="white"
       borderRadius={20}
       bgGradient="linear(to-l, #7928CA, #FF0080)"
     >
       <Box pos="absolute" right={5} top={0}>
-        <Icon as={RiVisaLine} color="white" fontSize="6xl" />
+        <Icon as={RiVisaLine} color="white" fontSize={['4xl', '4xl', '6xl']} />
       </Box>
-      <Text fontSize={'3xl'} padding="90px 0 15px" textAlign="center">
+      <Text
+        fontSize={['2xl', '2xl', '3xl']}
+        padding={['40px 0 15px', '40px 0 15px', '60px 0 15px']}
+        textAlign="center"
+      >
         {formattedCardNumber}
       </Text>
       <Text fontSize={'md'} paddingBottom="20px" textAlign="center">
         {expiryMonth}/{expiryYear}
       </Text>
-      <Text textAlign="left">{userName}</Text>
+      <Text pos="absolute" left={'20px'} bottom={'20px'}>
+        {userName}
+      </Text>
     </Box>
   );
 }

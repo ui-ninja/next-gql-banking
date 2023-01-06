@@ -5,7 +5,7 @@ export default function Footer() {
     <Box
       bgColor="brand.900"
       as="footer"
-      p="4"
+      py="4"
       minH="77px"
       borderTopWidth={4}
       borderTopColor="#eee"

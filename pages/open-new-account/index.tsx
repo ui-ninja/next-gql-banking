@@ -93,7 +93,6 @@ export default function OpenNewAccount({
       }),
     {
       onSuccess: async (res) => {
-        console.log('res>>>>', res);
         toast({
           title: 'Account created.',
           description: "We've created your account for you.",
@@ -130,7 +129,7 @@ export default function OpenNewAccount({
   }
 
   return (
-    <Box maxW="50%" marginX="auto">
+    <Box maxW={['100%', '100%', '50%']} marginX="auto">
       <H1>Open new account</H1>
       <Divider mt="2" mb="10" borderColor="black" />
 
