@@ -39,7 +39,10 @@ export class TransactionsResolver {
       const endCursor = lastResultsItem.id;
 
       // this helps to determine if we have nextPage
-      const secondQueryResult = dummyTransactionData.slice(endCursor, first);
+      const secondQueryResult = dummyTransactionData.slice(
+        endCursor,
+        first + endCursor
+      );
 
       return {
         pageInfo: {

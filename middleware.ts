@@ -9,5 +9,5 @@ export default withAuth({
 });
 
 export const config = {
-  matcher: ['/dashboard', '/transactions', '/open-new-account'],
+  matcher: ['/dashboard', '/transactions/:accountId*', '/open-new-account'],
 };

@@ -1,7 +1,7 @@
 ### Todos:
 
 - [x] mongodb environment variable
-- [x] schema generator for codegen
+- [x] schema generator via codegen
 - [x] nextAuth for session management
 - [x] added auth pages - login and signup with `react-hook-form`
 - [x] home design
@@ -9,7 +9,7 @@
 - [x] cursor based pagination on dummy transaction data
 - [x] dashboard design
 - [x] Responsive – Desktop, Tablet, Mobile
-- [ ] list transactions
+- [x] list transactions
 - [ ] sort transactions by date (last month, last 3 months and last 6 months)
 - [ ] modal to welcome new user
 - [ ] generic error page

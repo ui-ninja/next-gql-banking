@@ -114,7 +114,7 @@ export type Transaction = {
 
 export type Transactions = {
   __typename?: 'Transactions';
-  edges?: Maybe<Array<Edge>>;
+  edges: Array<Edge>;
   pageInfo: PageInfo;
 };
 
@@ -151,7 +151,7 @@ export type TransactionsQueryVariables = Exact<{
 }>;
 
 
-export type TransactionsQuery = { __typename?: 'Query', transactions: { __typename?: 'Transactions', edges?: Array<{ __typename?: 'Edge', cursor: number, node: { __typename?: 'Transaction', id: string, accountId: string, createdAt: string, amount: number, type: string } }> | null, pageInfo: { __typename?: 'PageInfo', endCursor: number, hasNextPage: boolean } } };
+export type TransactionsQuery = { __typename?: 'Query', transactions: { __typename?: 'Transactions', edges: Array<{ __typename?: 'Edge', cursor: number, node: { __typename?: 'Transaction', id: string, accountId: string, createdAt: string, amount: number, type: string } }>, pageInfo: { __typename?: 'PageInfo', endCursor: number, hasNextPage: boolean } } };
 
 export type GetUserQueryVariables = Exact<{
   emailAddress: Scalars['String'];
@@ -201,7 +201,7 @@ export const AddAccountDocument = gql`
 }
     `;
 export const TransactionsDocument = gql`
-    query Transactions($after: Float!, $first: Float!, $accountId: String!) {
+    query transactions($after: Float!, $first: Float!, $accountId: String!) {
   transactions(after: $after, first: $first, accountId: $accountId) {
     edges {
       cursor
@@ -262,8 +262,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     addAccount(variables: AddAccountMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AddAccountMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<AddAccountMutation>(AddAccountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'addAccount', 'mutation');
     },
-    Transactions(variables: TransactionsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<TransactionsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<TransactionsQuery>(TransactionsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Transactions', 'query');
+    transactions(variables: TransactionsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<TransactionsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<TransactionsQuery>(TransactionsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'transactions', 'query');
     },
     getUser(variables: GetUserQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetUserQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetUserQuery>(GetUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getUser', 'query');

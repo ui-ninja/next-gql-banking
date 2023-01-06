@@ -1,15 +1,12 @@
 import { Box, Flex, Grid, Icon, Spinner, Text } from '@chakra-ui/react';
 import { GetServerSidePropsContext } from 'next';
 import { unstable_getServerSession } from 'next-auth';
-import Link from 'next/link';
-import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { dehydrate, useQuery } from 'react-query';
 import { getAccountByUserId, queryClient } from '../../src/api';
 import { H1, H3, H4 } from '../../src/components/atoms/typography';
 import AccountCard from '../../src/components/molecules/AccountCard';
 import AddNewAccount from '../../src/components/molecules/AddNewAccoutCard';
 import PaymentCard from '../../src/components/molecules/PaymentCard';
-import Routes from '../../src/constants/routes';
 import { Account } from '../../src/generated/graphql';
 import { authOptions } from '../api/auth/[...nextauth]';
 

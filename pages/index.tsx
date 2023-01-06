@@ -46,12 +46,12 @@ export default function Home() {
                   Dashboard
                 </Button>
                 <Button
-                  onClick={() => router.push(Routes.TRANSACTIONS)}
+                  onClick={() => router.push(Routes.OPEN_NEW_ACCOUNT)}
                   variant="secondary"
                   px={14}
                   mt={[5, 5, 0]}
                 >
-                  View all transactions
+                  Open new account
                 </Button>
               </>
             ) : (

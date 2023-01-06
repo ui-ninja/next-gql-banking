@@ -41,6 +41,6 @@ export class Transactions {
   @Field()
   pageInfo!: PageInfo;
 
-  @Field(() => [Edge], { defaultValue: [] })
+  @Field(() => [Edge])
   edges!: Edge[];
 }
