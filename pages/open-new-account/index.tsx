@@ -1,3 +1,9 @@
+import { useEffect } from 'react';
+import { dehydrate, useMutation, useQuery } from 'react-query';
+import { Controller, useForm } from 'react-hook-form';
+import { GetServerSidePropsContext } from 'next';
+import { unstable_getServerSession } from 'next-auth';
+import { useRouter } from 'next/router';
 import {
   Box,
   Divider,
@@ -9,25 +15,22 @@ import {
   Text,
   useToast,
 } from '@chakra-ui/react';
-import { GetServerSidePropsContext } from 'next';
-import { unstable_getServerSession } from 'next-auth';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { dehydrate, useMutation, useQuery } from 'react-query';
+
 import { addAccount, getUser, queryClient } from '../../src/api';
+import { authOptions } from '../api/auth/[...nextauth]';
+
 import Button from '../../src/components/atoms/Button';
 import Input from '../../src/components/atoms/Input';
 import Select from '../../src/components/atoms/Select';
 import { H1 } from '../../src/components/atoms/typography';
 import RadioCard from '../../src/components/molecules/RadioCard';
+
 import Routes from '../../src/constants/routes';
 import {
   ACCOUNT_CATEGORIES,
   ACCOUNT_TYPE,
   NewAccountForm,
 } from '../../src/types';
-import { authOptions } from '../api/auth/[...nextauth]';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   // get user id from session
@@ -103,7 +106,6 @@ export default function OpenNewAccount({
         router.push(Routes.DASHBOARD);
       },
       onError(error) {
-        console.error(error);
         toast({
           title: 'Error occurred.',
           description:

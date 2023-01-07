@@ -76,7 +76,12 @@ function Transactions({ accountId }: { accountId: string }) {
   );
 
   if (isLoading) {
-    return <H1>Loading results...</H1>;
+    return (
+      <H1>
+        <Spinner mr={5} />
+        Loading results...
+      </H1>
+    );
   }
 
   if (isError || !data?.transactions) {

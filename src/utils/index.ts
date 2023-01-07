@@ -1,3 +1,5 @@
+import { GraphQLError } from 'graphql';
+
 export const formatCardNumber = (value: number) => {
   const cardNumber = String(value);
   const v = cardNumber.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
@@ -14,4 +16,11 @@ export const formatCardNumber = (value: number) => {
   } else {
     return value;
   }
+};
+
+export const isExistingEmailUsed = (error: any) => {
+  return (
+    error?.response?.errors &&
+    error.response.errors[0]?.extensions?.exception?.code === 11000
+  );
 };

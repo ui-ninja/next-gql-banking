@@ -1,14 +1,15 @@
-import { Box, Flex, Grid, GridItem, Show } from '@chakra-ui/react';
-import { useSession } from 'next-auth/react';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import { useSession } from 'next-auth/react';
+import { Box, Flex, Grid, GridItem, Show } from '@chakra-ui/react';
 
 import Button from '../src/components/atoms/Button';
 import { H1, H3 } from '../src/components/atoms/typography';
 import FeatureCard from '../src/components/molecules/FeatureCard';
 
-import HomeConstants from '../src/constants/HomeConstants';
 import Routes from '../src/constants/routes';
+import CommonConstants from '../src/constants/common';
+import HomeConstants from '../src/constants/HomeConstants';
 
 export default function Home() {
   const router = useRouter();
@@ -26,61 +27,52 @@ export default function Home() {
           />
         </Show>
         <Box>
-          <H1>Shop smart and safely with a NextGen choice account</H1>
-          <H3>
-            Open a NextGen account and get a Digi Card, with dynamic CVC that
-            refreshes every 24 hours.
-          </H3>
-          <Flex
-            flexWrap={['wrap', 'wrap', 'nowrap']}
-            justifyContent={['center', 'center', 'initial']}
-          >
+          <H1>{HomeConstants.heroBanner.heading}</H1>
+          <H3>{HomeConstants.heroBanner.subHeading}</H3>
+          <Grid templateColumns="repeat(auto-fit, minmax(200px, 1fr))" gap={6}>
             {session ? (
               <>
                 <Button
                   onClick={() => router.push(Routes.DASHBOARD)}
-                  mr="5"
                   variant="primary"
                   px={14}
                 >
-                  Dashboard
+                  {CommonConstants.DASHBOARD}
                 </Button>
                 <Button
                   onClick={() => router.push(Routes.OPEN_NEW_ACCOUNT)}
                   variant="secondary"
                   px={14}
-                  mt={[5, 5, 0]}
                 >
-                  Open new account
+                  {CommonConstants.OPEN_NEW_ACCOUNT}
                 </Button>
               </>
             ) : (
               <>
                 <Button
                   onClick={() => router.push(Routes.LOGIN)}
-                  mr="5"
                   variant="primary"
                   px={14}
                 >
-                  Login
+                  {CommonConstants.LOGIN}
                 </Button>
                 <Button
                   onClick={() => router.push(Routes.REGISTER)}
                   variant="secondary"
                   px={14}
                 >
-                  Sign up
+                  {CommonConstants.SIGNUP}
                 </Button>
               </>
             )}
-          </Flex>
+          </Grid>
         </Box>
       </Flex>
 
       <Box>
-        <H1 textAlign="center">Much more with us!</H1>
+        <H1 textAlign="center">{HomeConstants.featureCards.heading}</H1>
         <Grid templateColumns="repeat(auto-fit, minmax(300px, 1fr))" gap={6}>
-          {HomeConstants.featureCards.map((card) => (
+          {HomeConstants.featureCards.features.map((card) => (
             <GridItem key={card.heading}>
               <FeatureCard
                 heading={card.heading}

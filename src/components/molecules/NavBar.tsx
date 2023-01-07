@@ -6,9 +6,12 @@ import Button from '../atoms/Button';
 
 import Link from '../atoms/Link';
 import { MdLogout } from 'react-icons/md';
+import { useRouter } from 'next/router';
+import CommonConstants from '../../constants/common';
 
 export default function NavBar() {
   const { data: session } = useSession();
+  const { pathname: routerPathname } = useRouter();
   return (
     <Flex
       as="nav"
@@ -24,6 +27,7 @@ export default function NavBar() {
             href={Routes.DASHBOARD}
             variant="secondary"
             ml={3}
+            isActive={routerPathname === Routes.DASHBOARD}
           >
             <Text fontSize="md">Dashboard</Text>
           </Link>
@@ -32,6 +36,7 @@ export default function NavBar() {
             href={Routes.OPEN_NEW_ACCOUNT}
             variant="secondary"
             ml={3}
+            isActive={routerPathname === Routes.OPEN_NEW_ACCOUNT}
           >
             <Text fontSize="md">Open new account</Text>
           </Link>
@@ -46,11 +51,23 @@ export default function NavBar() {
         </>
       ) : (
         <>
-          <Link as={NextLink} href={Routes.LOGIN} variant="secondary" ml={3}>
-            <Text fontSize="md">Login</Text>
+          <Link
+            as={NextLink}
+            href={Routes.LOGIN}
+            variant="secondary"
+            ml={3}
+            isActive={routerPathname === Routes.LOGIN}
+          >
+            <Text fontSize="md">{CommonConstants.LOGIN}</Text>
           </Link>
-          <Link as={NextLink} href={Routes.REGISTER} variant="secondary" ml={3}>
-            <Text fontSize="md">Sign up</Text>
+          <Link
+            as={NextLink}
+            href={Routes.REGISTER}
+            variant="secondary"
+            ml={3}
+            isActive={routerPathname === Routes.REGISTER}
+          >
+            <Text fontSize="md">{CommonConstants.SIGNUP}</Text>
           </Link>
         </>
       )}

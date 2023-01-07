@@ -1,5 +1,7 @@
 import { Box, Center, Container, Text } from '@chakra-ui/react';
 
+const fullyear = new Date().getFullYear();
+
 export default function Footer() {
   return (
     <Box
@@ -12,7 +14,7 @@ export default function Footer() {
     >
       <Container maxW="container.xl">
         <Center>
-          <Text color="white">Copyright 2022-23</Text>
+          <Text color="white">Copyright &copy;{fullyear}</Text>
         </Center>
       </Container>
     </Box>

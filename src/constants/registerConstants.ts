@@ -1,4 +1,5 @@
 const registerConstants = {
+  PAGE_HEADING: 'Sign up with NextGen!',
   NAME_LABEL: 'Name',
   NAME_REQUIRED: 'Full name is required to create an account.',
   NAME_PLACEHOLDER: 'Enter your full name matching Pan card',

@@ -1,4 +1,5 @@
 const loginConstants = {
+  LOGIN_PAGE_HEADING: 'Log in to your account',
   EMAIL_LABEL: 'Email address',
   EMAIL_REGEX: /\S+@\S+\.\S+/,
   EMAIL_REQUIRED: 'Email address is required to login',

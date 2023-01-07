@@ -1,3 +1,7 @@
+import { useRouter } from 'next/router';
+import { signIn } from 'next-auth/react';
+import { useMutation } from 'react-query';
+import { Controller, useForm } from 'react-hook-form';
 import {
   Box,
   Divider,
@@ -7,8 +11,8 @@ import {
   Textarea,
   useToast,
 } from '@chakra-ui/react';
-import { Controller, useForm } from 'react-hook-form';
-import { useMutation } from 'react-query';
+
+import { addUser } from '../../../src/api';
 
 import { H1 } from '../../../src/components/atoms/typography';
 import Input from '../../../src/components/atoms/Input';
@@ -16,12 +20,12 @@ import Button from '../../../src/components/atoms/Button';
 import Select from '../../../src/components/atoms/Select';
 import PasswordInput from '../../../src/components/molecules/PasswordInput';
 
-import registerConstants from '../../../src/constants/registerConstants';
-import { addUser } from '../../../src/api';
-import { AddNewUserMutation, RegisterForm } from '../../../src/types';
-import { useRouter } from 'next/router';
+import RegisterConstants from '../../../src/constants/registerConstants';
 import Routes from '../../../src/constants/routes';
-import { signIn } from 'next-auth/react';
+import CommonConstants from '../../../src/constants/common';
+
+import { AddNewUserMutation, RegisterForm } from '../../../src/types';
+import { isExistingEmailUsed } from '../../../src/utils';
 
 export default function Register() {
   const {
@@ -56,8 +60,8 @@ export default function Register() {
         const { email, password } = variables;
         if (id) {
           toast({
-            title: 'Account created.',
-            description: "We've created your account for you.",
+            title: CommonConstants.ACCOUNT_CREATED,
+            description: CommonConstants.REDIRECT_TO_DASHBOARD,
             status: 'success',
             duration: 5000,
             isClosable: true,
@@ -73,15 +77,17 @@ export default function Register() {
           if (status?.ok) {
             router.push(Routes.DASHBOARD);
           } else {
-            throw new Error('Invalid username or password');
+            throw new Error(CommonConstants.SIGNUP_FAILED);
           }
         }
       },
       onError(error) {
+        // check if error is due to existing email address in system
         toast({
-          title: 'Error occurred.',
-          description:
-            'We are unable to create your account at the moment. Please try again after some time.',
+          title: CommonConstants.ERROR_OCCURRED,
+          description: isExistingEmailUsed(error)
+            ? CommonConstants.EMAIL_ALREADY_IN_USE
+            : CommonConstants.SIGNUP_FAILED,
           status: 'error',
           duration: 9000,
           isClosable: true,
@@ -101,7 +107,7 @@ export default function Register() {
 
   return (
     <Box maxW={'sm'} margin="0 auto">
-      <H1>Create an account with us!</H1>
+      <H1>{RegisterConstants.PAGE_HEADING}</H1>
 
       <Divider mt="2" mb="10" borderColor="black" />
 
@@ -110,15 +116,15 @@ export default function Register() {
           name="name"
           control={control}
           rules={{
-            required: registerConstants.NAME_REQUIRED,
+            required: RegisterConstants.NAME_REQUIRED,
           }}
           render={({ field, formState: { errors } }) => (
             <FormControl mt="4" isInvalid={Boolean(errors.name)}>
               <FormLabel htmlFor="name">
-                {registerConstants.NAME_LABEL}
+                {RegisterConstants.NAME_LABEL}
               </FormLabel>
               <Input
-                placeholder={registerConstants.NAME_PLACEHOLDER}
+                placeholder={RegisterConstants.NAME_PLACEHOLDER}
                 {...field}
               />
               <FormErrorMessage>
@@ -132,10 +138,10 @@ export default function Register() {
           name="email"
           control={control}
           rules={{
-            required: registerConstants.EMAIL_REQUIRED,
+            required: RegisterConstants.EMAIL_REQUIRED,
             pattern: {
-              value: registerConstants.EMAIL_REGEX,
-              message: registerConstants.EMAIL_NOT_VALID,
+              value: RegisterConstants.EMAIL_REGEX,
+              message: RegisterConstants.EMAIL_NOT_VALID,
             },
           }}
           render={({ field, formState: { errors } }) => (
@@ -143,7 +149,7 @@ export default function Register() {
               <FormLabel htmlFor="email">Email address</FormLabel>
               <Input
                 type="email"
-                placeholder={registerConstants.EMAIL_PLACEHOLDER}
+                placeholder={RegisterConstants.EMAIL_PLACEHOLDER}
                 {...field}
               />
               <FormErrorMessage>
@@ -157,10 +163,10 @@ export default function Register() {
           name="password"
           control={control}
           rules={{
-            required: registerConstants.PASSWORD_REQUIRED,
+            required: RegisterConstants.PASSWORD_REQUIRED,
             pattern: {
-              value: registerConstants.PASSWORD_REGEX,
-              message: registerConstants.PASSWORD_NOT_VALID,
+              value: RegisterConstants.PASSWORD_REGEX,
+              message: RegisterConstants.PASSWORD_NOT_VALID,
             },
           }}
           render={({ field, formState: { errors } }) => (
@@ -168,7 +174,7 @@ export default function Register() {
               <FormLabel htmlFor="password">Password</FormLabel>
               <PasswordInput
                 {...field}
-                placeholder={registerConstants.PASSWORD_PLACEHOLDER}
+                placeholder={RegisterConstants.PASSWORD_PLACEHOLDER}
               />
               <FormErrorMessage>
                 {errors.password && errors.password.message}
@@ -181,29 +187,29 @@ export default function Register() {
           name="phone"
           control={control}
           rules={{
-            required: registerConstants.PHONE_REQUIRED,
+            required: RegisterConstants.PHONE_REQUIRED,
             minLength: {
               value: 10,
-              message: registerConstants.PHONE_NOT_VALID,
+              message: RegisterConstants.PHONE_NOT_VALID,
             },
             maxLength: {
               value: 10,
-              message: registerConstants.PHONE_NOT_VALID,
+              message: RegisterConstants.PHONE_NOT_VALID,
             },
             pattern: {
-              value: registerConstants.PHONE_REGEX,
-              message: registerConstants.PHONE_NOT_VALID,
+              value: RegisterConstants.PHONE_REGEX,
+              message: RegisterConstants.PHONE_NOT_VALID,
             },
           }}
           render={({ field, formState: { errors } }) => (
             <FormControl mt="4" isInvalid={Boolean(errors.phone)}>
               <FormLabel htmlFor="phone">
-                {registerConstants.PHONE_LABEL}
+                {RegisterConstants.PHONE_LABEL}
               </FormLabel>
               <Input
                 type="tel"
                 {...field}
-                placeholder={registerConstants.PHONE_PLACEHOLDER}
+                placeholder={RegisterConstants.PHONE_PLACEHOLDER}
               />
               <FormErrorMessage>
                 {errors.phone && errors.phone.message}
@@ -218,12 +224,12 @@ export default function Register() {
           render={({ field }) => (
             <FormControl mt="4">
               <FormLabel htmlFor="residence">
-                {registerConstants.RESIDENCE_LABEL}
+                {RegisterConstants.RESIDENCE_LABEL}
               </FormLabel>
               <Textarea
                 borderColor="brand.900"
                 {...field}
-                placeholder={registerConstants.RESIDENCE_PLACEHOLDER}
+                placeholder={RegisterConstants.RESIDENCE_PLACEHOLDER}
               />
             </FormControl>
           )}
@@ -235,10 +241,10 @@ export default function Register() {
           render={({ field }) => (
             <FormControl mt="4">
               <FormLabel htmlFor="occupation">
-                {registerConstants.OCCUPATION_LABEL}
+                {RegisterConstants.OCCUPATION_LABEL}
               </FormLabel>
               <Select {...field}>
-                {registerConstants.OCCUPATION_OPTIONS.map((item) => (
+                {RegisterConstants.OCCUPATION_OPTIONS.map((item) => (
                   <option key={item.value} value={item.value}>
                     {item.label}
                   </option>
@@ -252,15 +258,15 @@ export default function Register() {
           name="income"
           control={control}
           rules={{
-            required: registerConstants.INCOME_REQUIRED,
+            required: RegisterConstants.INCOME_REQUIRED,
           }}
           render={({ field, formState: { errors } }) => (
             <FormControl mt="4" isInvalid={Boolean(errors.income)}>
               <FormLabel htmlFor="income">
-                {registerConstants.INCOME_LABEL}
+                {RegisterConstants.INCOME_LABEL}
               </FormLabel>
               <Select {...field}>
-                {registerConstants.INCOME_OPTIONS.map((item) => (
+                {RegisterConstants.INCOME_OPTIONS.map((item) => (
                   <option key={item.value} value={item.value}>
                     {item.label}
                   </option>
@@ -277,28 +283,28 @@ export default function Register() {
           name="govtId"
           control={control}
           rules={{
-            required: registerConstants.GOVTID_REQUIRED,
+            required: RegisterConstants.GOVTID_REQUIRED,
             minLength: {
               value: 10,
-              message: registerConstants.GOVTID_NOT_VALID,
+              message: RegisterConstants.GOVTID_NOT_VALID,
             },
             maxLength: {
               value: 10,
-              message: registerConstants.GOVTID_NOT_VALID,
+              message: RegisterConstants.GOVTID_NOT_VALID,
             },
             pattern: {
-              value: registerConstants.GOVTID_REGEX,
-              message: registerConstants.GOVTID_NOT_VALID,
+              value: RegisterConstants.GOVTID_REGEX,
+              message: RegisterConstants.GOVTID_NOT_VALID,
             },
           }}
           render={({ field, formState: { errors } }) => (
             <FormControl mt="4" isInvalid={Boolean(errors.govtId)}>
               <FormLabel htmlFor="govtId">
-                {registerConstants.GOVTID_LABEL}
+                {RegisterConstants.GOVTID_LABEL}
               </FormLabel>
               <Input
                 {...field}
-                placeholder={registerConstants.GOVTID_PLACEHOLDER}
+                placeholder={RegisterConstants.GOVTID_PLACEHOLDER}
               />
               <FormErrorMessage>
                 {errors.govtId && errors.govtId.message}
@@ -313,7 +319,7 @@ export default function Register() {
           variant="primary"
           isLoading={isSubmitting}
         >
-          Create account
+          {CommonConstants.SIGNUP}
         </Button>
       </form>
     </Box>
