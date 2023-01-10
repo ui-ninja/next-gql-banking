@@ -14,3 +14,6 @@
 - [ ] modal to welcome new user
 - [ ] generic error page
 - [ ] Unit test – Jest, React testing library
+- [ ] CD/CD using github actions
+- [ ] Deploy on vercel
+- [ ] Mongo Atlas configuration
