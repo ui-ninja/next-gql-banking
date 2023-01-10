@@ -1,27 +1,23 @@
-import { Flex, Icon, Text } from '@chakra-ui/react';
+import { Box, Flex, Icon, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import Routes from '../../constants/routes';
+import Button from '../atoms/Button';
 
 export default function AddNewAccount() {
   return (
-    <Link href={Routes.OPEN_NEW_ACCOUNT}>
+    <Button variant="secondary" borderRadius={0}>
       <Flex
-        w="290px"
-        h="150px"
-        borderWidth={1}
-        borderColor="gray.300"
-        borderRadius={12}
-        py={5}
-        px={8}
-        mr={5}
-        flexDirection="column"
-        justifyContent="center"
+        flexDir="column"
         alignItems="center"
+        justifyContent="center"
+        h="100%"
       >
-        <Icon as={BsFillPlusCircleFill} fontSize="3xl" />
-        <Text fontSize="2xl">Open new account</Text>
+        <Icon as={BsFillPlusCircleFill} fontSize="3xl" aria-hidden />
+        <Text mt={2} fontSize="2xl">
+          Open new account
+        </Text>
       </Flex>
-    </Link>
+    </Button>
   );
 }

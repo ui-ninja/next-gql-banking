@@ -1,4 +1,4 @@
-import { Box, Icon, Text } from '@chakra-ui/react';
+import { Box, Flex, Icon, Text } from '@chakra-ui/react';
 import { RiVisaLine } from 'react-icons/ri';
 import { Card } from '../../generated/graphql';
 import { formatCardNumber } from '../../utils';
@@ -13,30 +13,62 @@ export default function PaymentCard({
   return (
     <Box
       pos="relative"
-      w={['315px', '315px', '385px']}
-      h={['180px', '180px', '230px']}
       textAlign="left"
+      maxW="375px"
+      minH="200px"
       p={15}
       color="white"
       borderRadius={20}
-      bgGradient="linear(to-l, #7928CA, #FF0080)"
+      backgroundColor="#633EF8"
+      overflow={'hidden'}
+      _before={{
+        display: 'block',
+        content: '""',
+        backgroundColor: '#8567FF',
+        width: '400px',
+        height: '400px',
+        borderRadius: '50%',
+        position: 'absolute',
+        left: '50%',
+        top: '-20%',
+      }}
+      _after={{
+        display: 'block',
+        content: '""',
+        backgroundColor: '#7856FF',
+        width: '300px',
+        height: '300px',
+        borderRadius: '50%',
+        position: 'absolute',
+        left: '54%',
+        top: '30%',
+      }}
     >
-      <Box pos="absolute" right={5} top={0}>
-        <Icon as={RiVisaLine} color="white" fontSize={['4xl', '4xl', '6xl']} />
-      </Box>
-      <Text
-        fontSize={['2xl', '2xl', '3xl']}
-        padding={['40px 0 15px', '40px 0 15px', '60px 0 15px']}
-        textAlign="center"
+      <Flex
+        pos="relative"
+        zIndex={10}
+        height="100%;"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
       >
-        {formattedCardNumber}
-      </Text>
-      <Text fontSize={'md'} paddingBottom="20px" textAlign="center">
-        {expiryMonth}/{expiryYear}
-      </Text>
-      <Text pos="absolute" left={'20px'} bottom={'20px'}>
-        {userName}
-      </Text>
+        <Box pos="absolute" right={0} top={'-20px'}>
+          <Icon
+            as={RiVisaLine}
+            color="white"
+            fontSize={['4xl', '4xl', '6xl']}
+          />
+        </Box>
+        <Text fontSize={['2xl', '2xl', '3xl']} textAlign="center">
+          {formattedCardNumber}
+        </Text>
+        <Text fontSize={'md'} textAlign="center">
+          {expiryMonth}/{expiryYear}
+        </Text>
+        <Text pos="absolute" left={'10px'} bottom={'10px'}>
+          {userName}
+        </Text>
+      </Flex>
     </Box>
   );
 }
