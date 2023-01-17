@@ -21,6 +21,7 @@ export default function PaymentCard({
       borderRadius={20}
       backgroundColor="#633EF8"
       overflow={'hidden'}
+      boxShadow="md"
       _before={{
         display: 'block',
         content: '""',
@@ -59,7 +60,7 @@ export default function PaymentCard({
             fontSize={['4xl', '4xl', '6xl']}
           />
         </Box>
-        <Text fontSize={['2xl', '2xl', '3xl']} textAlign="center">
+        <Text fontSize={['xl', 'xl', '2xl']} textAlign="center">
           {formattedCardNumber}
         </Text>
         <Text fontSize={'md'} textAlign="center">

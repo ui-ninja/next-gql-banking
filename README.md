@@ -10,10 +10,8 @@
 - [x] dashboard design
 - [x] Responsive – Desktop, Tablet, Mobile
 - [x] list transactions
-- [ ] sort transactions by date (last month, last 3 months and last 6 months)
-- [ ] modal to welcome new user
-- [ ] generic error page
+- [x] generic error page
 - [ ] Unit test – Jest, React testing library
+- [ ] performance scores
 - [ ] CD/CD using github actions
 - [ ] Deploy on vercel
-- [ ] Mongo Atlas configuration

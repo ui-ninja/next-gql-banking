@@ -21,6 +21,10 @@ export default function AccountCard({
         maxW={'400px'}
         border="1px solid"
         borderColor="gray.100"
+        _hover={{
+          transform: 'translateY(-5px)',
+          transition: 'all ease 0.3s',
+        }}
       >
         <Box
           aria-hidden

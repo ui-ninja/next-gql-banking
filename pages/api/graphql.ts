@@ -1,10 +1,7 @@
 import 'reflect-metadata';
-import { ApolloServer } from 'apollo-server-micro';
-import {
-  ApolloServerPluginLandingPageProductionDefault,
-  ApolloServerPluginLandingPageLocalDefault,
-} from 'apollo-server-core';
 import { buildSchema } from 'type-graphql';
+import { ApolloServer } from '@apollo/server';
+import { startServerAndCreateNextHandler } from '@as-integrations/next';
 
 import { UserResolver } from '../../src/schema/user/user.resolver';
 import { AccountResolver } from '../../src/schema/account/account.resolver';
@@ -19,27 +16,6 @@ const schema = await buildSchema({
 
 const server = new ApolloServer({
   schema,
-  plugins: [
-    process.env.NODE_ENV === 'production'
-      ? ApolloServerPluginLandingPageProductionDefault({
-          embed: true,
-          graphRef: '',
-        })
-      : ApolloServerPluginLandingPageLocalDefault({ embed: true }),
-  ],
 });
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
-const startServer = server.start();
-
-export default async function handler(req: any, res: any) {
-  await startServer;
-  await server.createHandler({
-    path: '/api/graphql',
-  })(req, res);
-}
+export default startServerAndCreateNextHandler(server);

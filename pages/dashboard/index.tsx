@@ -113,7 +113,7 @@ export default function Dashboard({ userId }: { userId: string }) {
       {dataSet?.cards.length && (
         <Box mt={10}>
           <H3>Your Cards:</H3>
-          <Grid templateColumns="repeat(auto-fit, minmax(335px,1fr))" gap={6}>
+          <Grid templateColumns="repeat(auto-fit, min(335px))" gap={6}>
             {dataSet?.cards.map((item) => {
               return (
                 <PaymentCard
