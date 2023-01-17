@@ -11,6 +11,7 @@
 - [x] Responsive – Desktop, Tablet, Mobile
 - [x] list transactions
 - [x] generic error page
+- [x] Error boundary fallback view component
 - [ ] Unit test – Jest, React testing library
 - [ ] performance scores
 - [ ] CD/CD using github actions

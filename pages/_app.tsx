@@ -7,6 +7,8 @@ import { SessionProvider } from 'next-auth/react';
 import { queryClient } from '../src/api';
 import { theme } from '../styles/theme/theme';
 import Layout from '../src/components/template/Layout';
+import ErrorBoundary from '../src/components/organisms/ErrorBoundary';
+import ErrorFallbackView from '../src/components/molecules/ErrorFallbackView';
 
 export default function App({
   Component,
@@ -18,7 +20,9 @@ export default function App({
         <SessionProvider session={session}>
           <ChakraProvider theme={theme}>
             <Layout>
-              <Component {...pageProps} />
+              <ErrorBoundary FallbackComponent={ErrorFallbackView}>
+                <Component {...pageProps} />
+              </ErrorBoundary>
             </Layout>
           </ChakraProvider>
         </SessionProvider>
