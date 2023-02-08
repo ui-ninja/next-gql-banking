@@ -13,5 +13,4 @@
 - [x] generic error page
 - [x] Error boundary fallback view component
 - [x] Unit test – Jest, React testing library
-- [ ] CD/CD using github actions
-- [ ] Deploy on vercel
+- [x] Deploy on vercel - [app link](https://next-gql-banking.vercel.app/)
