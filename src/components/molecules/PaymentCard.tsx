@@ -48,7 +48,7 @@ export default function PaymentCard({
       <Flex
         pos="relative"
         zIndex={10}
-        height="100%;"
+        minHeight="170px"
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
