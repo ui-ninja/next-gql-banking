@@ -1,9 +1,21 @@
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import Home from '..';
 import { useSession } from 'next-auth/react';
+import '@testing-library/jest-dom';
+import Home from '../../pages';
 
 jest.mock('next-auth/react');
+
+const setup = () => {
+  const utils = render(<Home />);
+  const heading = screen.getByRole('heading', {
+    name: /Shop smart and safely with a NextGen/i,
+  });
+
+  return {
+    heading,
+    ...utils,
+  };
+};
 
 describe('Home page testing suite', () => {
   it('should show login and signup button when user is not authenticated', () => {
@@ -12,17 +24,13 @@ describe('Home page testing suite', () => {
       status: 'unauthenticated',
     });
 
-    render(<Home />);
+    const { heading, getByRole } = setup();
 
-    const heading = screen.getByRole('heading', {
-      name: /Shop smart and safely with a NextGen/i,
-    });
-
-    const loginBtn = screen.getByRole('button', {
+    const loginBtn = getByRole('button', {
       name: /Login/i,
     });
 
-    const signupBtn = screen.getByRole('button', {
+    const signupBtn = getByRole('button', {
       name: /Sign up/i,
     });
 
@@ -44,16 +52,17 @@ describe('Home page testing suite', () => {
       data: mockSession,
       status: 'unauthenticated',
     });
+    const { heading, getByRole } = setup();
 
-    render(<Home />);
-
-    const dashboardBtn = screen.getByRole('button', {
+    const dashboardBtn = getByRole('button', {
       name: /Dashboard/i,
     });
 
-    const openNewAccountBtn = screen.getByRole('button', {
+    const openNewAccountBtn = getByRole('button', {
       name: /open new account/i,
     });
+
+    expect(heading).toBeInTheDocument();
     expect(dashboardBtn).toBeInTheDocument();
     expect(openNewAccountBtn).toBeInTheDocument();
   });

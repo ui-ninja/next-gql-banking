@@ -1,6 +1,5 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
 
-import { Icon } from '@chakra-ui/react';
 import Link from 'next/link';
 import { BsBank2 } from 'react-icons/bs';
 

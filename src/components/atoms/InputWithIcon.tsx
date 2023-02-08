@@ -1,11 +1,11 @@
 /* eslint-disable react/no-children-prop */
+import { forwardRef } from 'react';
 import {
   InputGroup,
   InputLeftElement,
   InputProps,
   InputRightElement,
 } from '@chakra-ui/react';
-import { forwardRef } from 'react';
 import Input from './Input';
 
 type Props = InputProps & {

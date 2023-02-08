@@ -1,8 +1,8 @@
+import { forwardRef } from 'react';
 import {
   Input as ChakraInput,
   InputProps as ChakraInputProps,
 } from '@chakra-ui/react';
-import { forwardRef } from 'react';
 
 type InputProps = {
   ref?: React.LegacyRef<HTMLInputElement>;
@@ -12,8 +12,8 @@ const Input = forwardRef(
   (props: InputProps, ref: React.ForwardedRef<HTMLInputElement>) => {
     return (
       <ChakraInput
-        variant="outline"
         ref={ref}
+        variant="outline"
         borderColor="brand.900"
         borderRadius="12"
         {...props}

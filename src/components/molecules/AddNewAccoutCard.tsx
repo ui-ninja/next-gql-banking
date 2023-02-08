@@ -1,7 +1,6 @@
-import { Box, Flex, Icon, Text } from '@chakra-ui/react';
-import Link from 'next/link';
+import { Flex, Icon, Text } from '@chakra-ui/react';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
-import Routes from '../../constants/routes';
+
 import Button from '../atoms/Button';
 
 export default function AddNewAccount() {

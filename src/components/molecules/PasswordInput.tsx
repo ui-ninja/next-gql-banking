@@ -4,13 +4,13 @@ import {
   InputProps as ChakraInputProps,
   InputRightElement,
 } from '@chakra-ui/react';
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+
 import Button from '../atoms/Button';
 import Input from '../atoms/Input';
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 
 type InputProps = {
   variant?: 'primary' | 'rounded';
-  ref?: React.LegacyRef<HTMLInputElement>;
 } & ChakraInputProps;
 
 const PasswordInput = forwardRef(

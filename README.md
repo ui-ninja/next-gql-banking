@@ -1,4 +1,4 @@
-### Todos:
+### Features/Toolset for project:
 
 - [x] mongodb environment variable
 - [x] schema generator via codegen
@@ -12,7 +12,6 @@
 - [x] list transactions
 - [x] generic error page
 - [x] Error boundary fallback view component
-- [ ] Unit test – Jest, React testing library
-- [ ] performance scores
+- [x] Unit test – Jest, React testing library
 - [ ] CD/CD using github actions
 - [ ] Deploy on vercel

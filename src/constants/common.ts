@@ -7,6 +7,10 @@ const CommonConstants = {
   ACCOUNT_CREATED: 'Account Created!!',
   REDIRECT_TO_DASHBOARD: 'You will be soon redirected to dashboard page.',
 
+  // 404
+  FOUR_OH_FOUR_TITLE: '404 - Page not found',
+  FOUR_OH_FOUR_TAKE_HOME_BUTTON_TEXT: 'Take me to homepage',
+
   // validation messages
   ERROR_OCCURRED: 'Error!',
   SIGNUP_FAILED:

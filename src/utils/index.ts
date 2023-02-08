@@ -1,5 +1,3 @@
-import { GraphQLError } from 'graphql';
-
 export const formatCardNumber = (value: number) => {
   const cardNumber = String(value);
   const v = cardNumber.replace(/\s+/g, '').replace(/[^0-9]/gi, '');

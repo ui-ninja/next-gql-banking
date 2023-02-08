@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Open new account testing suite should show fields - name, email and phone 1`] = `
+<input
+  aria-readonly="true"
+  class="chakra-input css-1mga5r6"
+  id="field-:r0:"
+  readonly=""
+  value="john doe"
+/>
+`;
+
+exports[`Open new account testing suite should show fields - name, email and phone 2`] = `
+<input
+  aria-readonly="true"
+  class="chakra-input css-1mga5r6"
+  id="field-:r1:"
+  readonly=""
+  type="email"
+  value="sample@yopmail.com"
+/>
+`;
+
+exports[`Open new account testing suite should show fields - name, email and phone 3`] = `
+<input
+  aria-readonly="true"
+  class="chakra-input css-1mga5r6"
+  id="field-:r2:"
+  readonly=""
+  value="5555555555"
+/>
+`;

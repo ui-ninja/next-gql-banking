@@ -1,6 +1,6 @@
 import { Box, Flex, Icon, Text } from '@chakra-ui/react';
 import Link from '../atoms/Link';
-import { H3 } from '../atoms/typography';
+import { H4 } from '../atoms/typography';
 
 type Props = {
   heading: string;
@@ -20,7 +20,7 @@ export default function FeatureCard({
       <Icon pr={3} fontSize="4xl" as={icon} color="brand.500" />
       <Box>
         <Link href={link}>
-          <H3 margin={0}>{heading}</H3>
+          <H4 margin={0}>{heading}</H4>
         </Link>
         <Text>{description}</Text>
       </Box>

@@ -22,6 +22,7 @@ import { queryClient, transactions } from '../../src/api';
 import { H1, H4 } from '../../src/components/atoms/typography';
 import Button from '../../src/components/atoms/Button';
 import { useState } from 'react';
+import useTransactions from '../../src/hooks/useTransactions';
 
 const PAGE_SIZE = 10;
 
@@ -60,19 +61,11 @@ function Transactions({ accountId }: { accountId: string }) {
 
   const { nextCursor, activePageNumber, previousCursor } = state;
 
-  const { data, isLoading, isError } = useQuery(
-    ['transactions', nextCursor, previousCursor],
-    () => {
-      return transactions({
-        accountId,
-        after: nextCursor,
-        before: previousCursor,
-        first: PAGE_SIZE,
-      });
-    },
-    {
-      keepPreviousData: true,
-    }
+  const { data, isLoading, isError } = useTransactions(
+    accountId,
+    nextCursor,
+    previousCursor,
+    PAGE_SIZE
   );
 
   if (isLoading) {

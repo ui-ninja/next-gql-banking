@@ -1,8 +1,8 @@
+import { forwardRef } from 'react';
 import {
   Select as ChakraSelect,
   SelectProps as ChakraSelectProps,
 } from '@chakra-ui/react';
-import { forwardRef } from 'react';
 
 type SelectProps = {
   ref?: React.LegacyRef<HTMLSelectElement>;

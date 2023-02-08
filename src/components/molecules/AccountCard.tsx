@@ -1,11 +1,13 @@
-import { Box, Flex, Icon, Text } from '@chakra-ui/react';
+import { Box, Flex, Text } from '@chakra-ui/react';
 import Link from 'next/link';
-import Routes from '../../constants/routes';
-import { Account } from '../../generated/graphql';
-import Illustration from '../../images/Business.svg';
+import Image from 'next/image';
 
 import { H3 } from '../atoms/typography';
-import Image from 'next/image';
+
+import { Account } from '../../generated/graphql';
+
+import Routes from '../../constants/routes';
+import Illustration from '../../images/Business.svg';
 
 export default function AccountCard({
   id,
@@ -27,10 +29,17 @@ export default function AccountCard({
         }}
       >
         <Box
+          as={Flex}
           aria-hidden
           w="30%"
-          bgGradient="linear-gradient(135deg, #F395BA 0%, #FED182 100%)"
-          as={Flex}
+          bgGradient={
+            // due to unknown issue in chakra ui
+            // jest fails to parse linear gradient values
+            // because of this test cases fails. Hence had to wrap this in env condition.
+            process.env.NODE_ENV === 'test'
+              ? ''
+              : 'linear-gradient(135deg, #F395BA 0%, #FED182 100%)'
+          }
           justifyContent="center"
           borderRadius={'16px 0 0 16px'}
         >

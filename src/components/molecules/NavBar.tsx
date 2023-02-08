@@ -12,6 +12,7 @@ import CommonConstants from '../../constants/common';
 export default function NavBar() {
   const { data: session } = useSession();
   const { pathname: routerPathname } = useRouter();
+
   return (
     <Flex
       as="nav"
