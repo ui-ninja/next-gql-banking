@@ -13,6 +13,11 @@ const nextConfig = {
     config.experiments.topLevelAwait = true;
     return config;
   },
+  env: {
+    MONGOOSE_URL: process.env.MONGOOSE_URL,
+    GRAPHQL_ENDPOINT: process.env.GRAPHQL_ENDPOINT,
+    SECRET: process.env.SECRET,
+  },
 };
 
 module.exports = withBundleAnalyzer(nextConfig);

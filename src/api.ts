@@ -4,7 +4,7 @@ import { QueryClient } from 'react-query';
 import { getSdk } from './generated/graphql';
 
 const gqlClient = new GraphQLClient(
-  process.env.GRAPHQL_ENDPOINT || 'http://localhost:3000/api/graphql'
+  process.env.GRAPHQL_ENDPOINT || '/api/graphql'
 );
 
 export const {
