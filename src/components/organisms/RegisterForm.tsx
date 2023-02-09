@@ -72,6 +72,7 @@ export default function RegisterInputForm({
               <Input
                 placeholder={RegisterConstants.NAME_PLACEHOLDER}
                 {...field}
+                autoFocus
               />
               <FormErrorMessage>
                 {errors.name && errors.name.message}

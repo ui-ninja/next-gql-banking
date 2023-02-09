@@ -73,6 +73,7 @@ export default function LoginInputForm({
                 type="email"
                 placeholder={LoginConstants.EMAIL_PLACEHOLDER}
                 id="email"
+                autoFocus
               />
               <FormErrorMessage>
                 {errors.email && errors.email.message}
