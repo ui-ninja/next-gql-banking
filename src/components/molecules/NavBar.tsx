@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { MdLogout } from 'react-icons/md';
 
 import CommonConstants from '../../constants/CommonConstants';
-import Routes from '../../constants/routes';
+import Routes from '../../constants/Routes';
 
 import Button from '../atoms/Button';
 import Link from '../atoms/Link';

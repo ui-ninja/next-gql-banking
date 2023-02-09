@@ -10,7 +10,7 @@ import CommonConstants from '../../../src/constants/CommonConstants';
 import { AddNewUserMutation } from '../../../src/types';
 import { isExistingEmailUsed } from '../../../src/utils';
 import RegisterInputForm from '../../../src/components/organisms/RegisterForm';
-import Routes from '../../../src/constants/routes';
+import Routes from '../../../src/constants/Routes';
 
 export default function Register() {
   const toast = useToast();

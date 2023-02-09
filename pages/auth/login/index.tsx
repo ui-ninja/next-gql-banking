@@ -6,7 +6,7 @@ import { LoginForm } from '../../../src/types';
 
 import CommonConstants from '../../../src/constants/CommonConstants';
 import LoginInputForm from '../../../src/components/organisms/LoginForm';
-import Routes from '../../../src/constants/routes';
+import Routes from '../../../src/constants/Routes';
 
 export async function getServerSideProps(context: any) {
   const csrfToken = await getCsrfToken(context);

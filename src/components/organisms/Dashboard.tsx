@@ -15,7 +15,7 @@ import AccountCard from '../molecules/AccountCard';
 import PaymentCard from '../molecules/PaymentCard';
 
 import DashboardConstants from '../../constants/DashboardConstants';
-import Routes from '../../constants/routes';
+import Routes from '../../constants/Routes';
 
 type Props = {
   isLoading: boolean;

@@ -9,7 +9,7 @@ import { H1, H3 } from '../src/components/atoms/typography';
 
 import CommonConstants from '../src/constants/CommonConstants';
 import HomeConstants from '../src/constants/HomeConstants';
-import Routes from '../src/constants/routes';
+import Routes from '../src/constants/Routes';
 
 const DynamicFeaturesList = dynamic(
   () => import('../src/components/organisms/FeaturesList'),

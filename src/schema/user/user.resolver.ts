@@ -1,5 +1,4 @@
 import { Resolver, Query, Arg, Mutation } from 'type-graphql';
-import bcrypt from 'bcrypt';
 
 import { NewUserInput, User } from './user';
 

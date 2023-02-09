@@ -17,7 +17,7 @@ import PasswordInput from '../../../src/components/molecules/PasswordInput';
 import CommonConstants from '../../constants/CommonConstants';
 
 import { AddNewUserMutation, RegisterForm } from '../../../src/types';
-import RegisterConstants from '../../constants/registerConstants';
+import RegisterConstants from '../../constants/RegisterConstants';
 
 export default function RegisterInputForm({
   onSignup,

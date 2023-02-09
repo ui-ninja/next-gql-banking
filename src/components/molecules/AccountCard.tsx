@@ -7,7 +7,7 @@ import { H3 } from '../atoms/typography';
 import { Account } from '../../generated/graphql';
 
 import Illustration from '../../images/Business.svg';
-import Routes from '../../constants/routes';
+import Routes from '../../constants/Routes';
 
 export default function AccountCard({
   id,
