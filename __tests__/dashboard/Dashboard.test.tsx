@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Dashboard from '../../components/organisms/Dashboard';
+import Dashboard from '../../src/components/organisms/Dashboard';
 
 const dummy_response_data = {
   account: [

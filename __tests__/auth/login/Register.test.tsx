@@ -5,8 +5,8 @@ import {
   screen,
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import RegisterInputForm from '../../../components/organisms/RegisterForm';
-import RegisterConstants from '../../../constants/registerConstants';
+import RegisterInputForm from '../../../src/components/organisms/RegisterForm';
+import RegisterConstants from '../../../src/constants/registerConstants';
 
 const setup = () => {
   const mockSignup = jest.fn((data) => {

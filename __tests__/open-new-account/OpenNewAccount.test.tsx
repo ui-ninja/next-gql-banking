@@ -5,8 +5,8 @@ import {
   waitForElementToBeRemoved,
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import OpenNewAccountForm from '../../components/organisms/OpenNewAccountForm';
-import { ACCOUNT_TYPE } from '../../types';
+import OpenNewAccountForm from '../../src/components/organisms/OpenNewAccountForm';
+import { ACCOUNT_TYPE } from '../../src/types';
 
 const dummyUser = {
   name: 'john doe',

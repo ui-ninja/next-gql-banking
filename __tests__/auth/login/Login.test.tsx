@@ -5,7 +5,7 @@ import {
   screen,
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import LoginInputForm from '../../../components/organisms/LoginForm';
+import LoginInputForm from '../../../src/components/organisms/LoginForm';
 
 const setup = () => {
   const mockLogin = jest.fn((data) => {

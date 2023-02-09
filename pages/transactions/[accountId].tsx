@@ -56,7 +56,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-function Transactions({ accountId }: { accountId: string }) {
+function Transactions({
+  accountId,
+  pageSize = PAGE_SIZE,
+}: {
+  accountId: string;
+  pageSize?: number;
+}) {
   const [state, setState] = useState({
     nextCursor: '',
     previousCursor: '',
@@ -69,7 +75,7 @@ function Transactions({ accountId }: { accountId: string }) {
     accountId,
     nextCursor,
     previousCursor,
-    PAGE_SIZE
+    pageSize
   );
 
   if (isLoading) {
@@ -123,9 +129,7 @@ function Transactions({ accountId }: { accountId: string }) {
       <H1>{transactionConstants.PAGE_HEADING}</H1>
       <TableContainer>
         <Table variant="striped" colorScheme="gray">
-          <TableCaption>
-            {transactionConstants.TRANSACTIONS_TABLE_CAPTION}
-          </TableCaption>
+          <TableCaption>Transactions data ({pageSize} per page)</TableCaption>
           <Thead>
             <Tr>
               {transactionConstants.TRANSACTIONS_TABLE_COLUMNS.map((col) => (
