@@ -1,15 +1,22 @@
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
-import { Box, Flex, Grid, GridItem, Show } from '@chakra-ui/react';
+import { Box, Flex, Grid, Show } from '@chakra-ui/react';
 
 import Button from '../src/components/atoms/Button';
 import { H1, H3 } from '../src/components/atoms/typography';
-import FeatureCard from '../src/components/molecules/FeatureCard';
 
 import CommonConstants from '../src/constants/CommonConstants';
 import HomeConstants from '../src/constants/HomeConstants';
 import Routes from '../src/constants/routes';
+
+const DynamicFeaturesList = dynamic(
+  () => import('../src/components/organisms/FeaturesList'),
+  {
+    loading: () => <H3>{'Loading...'}</H3>,
+  }
+);
 
 export default function Home() {
   const router = useRouter();
@@ -69,21 +76,7 @@ export default function Home() {
         </Box>
       </Flex>
 
-      <Box>
-        <H1 textAlign="center">{HomeConstants.featureCards.heading}</H1>
-        <Grid templateColumns="repeat(auto-fit, minmax(300px, 1fr))" gap={6}>
-          {HomeConstants.featureCards.features.map((card) => (
-            <GridItem key={card.heading}>
-              <FeatureCard
-                heading={card.heading}
-                description={card.description}
-                link={card.link}
-                icon={card.icon}
-              />
-            </GridItem>
-          ))}
-        </Grid>
-      </Box>
+      <DynamicFeaturesList />
     </Box>
   );
 }

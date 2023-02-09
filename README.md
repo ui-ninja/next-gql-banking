@@ -10,4 +10,4 @@
 6. `ChakraUI` used as component library. Custom theme created for buttons, links etc. For ex. for button created custom variants `primary` and `secondary`. Used `@chakra-ui/cli` to generate typings for custom theme.
 7. `react-query` for server-side state management, fetching, and caching of data, and error handling.
 8. Test cases using `React testing library` and `Jest`.
-9. Code splitting of cart and theme manager component using `React.lazy` and javascript's `import`.
+9. Code splitting using `next/dynamic`.
