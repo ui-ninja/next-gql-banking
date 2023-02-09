@@ -1,4 +1,4 @@
-const registerConstants = {
+const RegisterConstants = {
   PAGE_HEADING: 'Sign up with NextGen!',
   NAME_LABEL: 'Name',
   NAME_REQUIRED: 'Full name is required to create an account.',
@@ -54,4 +54,4 @@ const registerConstants = {
   GOVTID_PLACEHOLDER: 'Enter your Pan card number',
 };
 
-export default registerConstants;
+export default RegisterConstants;

@@ -1,5 +1,11 @@
 import { ComponentStyleConfig } from '@chakra-ui/react';
 
+const disabledStyles = {
+  backgroundColor: 'gray.100',
+  borderColor: 'gray.100',
+  color: 'gray.500',
+};
+
 export const ButtonStyles: ComponentStyleConfig = {
   // style object for base or default style
   baseStyle: {
@@ -20,6 +26,12 @@ export const ButtonStyles: ComponentStyleConfig = {
         bg: 'brand.900',
         borderColor: 'brand.900',
         boxShadow: 'md',
+        _disabled: {
+          ...disabledStyles,
+        },
+      },
+      _disabled: {
+        ...disabledStyles,
       },
     }),
 

@@ -16,8 +16,8 @@ import PasswordInput from '../../../src/components/molecules/PasswordInput';
 
 import { LoginForm } from '../../../src/types';
 
-import LoginConstants from '../../../src/constants/loginConstants';
-import CommonConstants from '../../../src/constants/common';
+import LoginConstants from '../../constants/LoginConstants';
+import CommonConstants from '../../constants/CommonConstants';
 
 export default function LoginInputForm({
   csrfToken,

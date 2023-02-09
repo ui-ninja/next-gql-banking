@@ -7,11 +7,12 @@ import { Text, useToast } from '@chakra-ui/react';
 import { addAccount, getUser, queryClient } from '../../src/api';
 import { authOptions } from '../api/auth/[...nextauth]';
 
-import Routes from '../../src/constants/routes';
+import Routes from '../../src/constants/Routes';
 import { NewAccountForm } from '../../src/types';
 
 import OpenNewAccountForm from '../../src/components/organisms/OpenNewAccountForm';
 import useUser from '../../src/hooks/useUser';
+import OpenNewAccountConstants from '../../src/constants/OpenNewAccount';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   // get user id from session
@@ -53,19 +54,20 @@ export default function OpenNewAccount({
     {
       onSuccess: async (res) => {
         toast({
-          title: 'Account created.',
-          description: "We've created your account for you.",
+          title: OpenNewAccountConstants.ACCOUNT_CREATED_SUCCESS_TOAST.TITLE,
+          description:
+            OpenNewAccountConstants.ACCOUNT_CREATED_SUCCESS_TOAST.DESCRIPTION,
           status: 'success',
           duration: 5000,
           isClosable: true,
         });
         router.push(Routes.DASHBOARD);
       },
-      onError(error) {
+      onError() {
         toast({
-          title: 'Error occurred.',
+          title: OpenNewAccountConstants.ACCOUNT_CREATED_ERROR_TOAST.TITLE,
           description:
-            'We are unable to create your account at the moment. Please try again after some time.',
+            OpenNewAccountConstants.ACCOUNT_CREATED_ERROR_TOAST.DESCRIPTION,
           status: 'error',
           duration: 5000,
           isClosable: true,
@@ -79,11 +81,11 @@ export default function OpenNewAccount({
   };
 
   if (isError) {
-    return <Text>Failed to load user data.</Text>;
+    return <Text>{OpenNewAccountConstants.ERROR_LOADING_DATA}</Text>;
   }
 
   if (isFetching) {
-    return <Text>Loading form...</Text>;
+    return <Text>{OpenNewAccountConstants.LOADING_DATA}</Text>;
   }
 
   if (data) {

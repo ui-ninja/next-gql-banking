@@ -1,4 +1,6 @@
 const CommonConstants = {
+  LOGO: 'NextGen Bank',
+
   DASHBOARD: 'Dashboard',
   OPEN_NEW_ACCOUNT: 'Open new account',
   LOGIN: 'Login',
@@ -19,6 +21,17 @@ const CommonConstants = {
     'Another account with given email id existing, please use another email address',
   USERNAME_OR_PASSWORD_INVALID:
     'Username or password is invalid. Please try again.',
+
+  // Prev and next button
+  PREVIOUS: 'Previous',
+  NEXT: 'Next',
+
+  // accounts
+  CREDIT_CARD: 'Credit card',
+  SAVINGS: 'Savings',
+
+  // Error fallback view
+  ERROR_FALLBACK_VIEW_TITLE: 'Oops, there is an error!',
 };
 
 export default CommonConstants;

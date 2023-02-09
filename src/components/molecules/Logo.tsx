@@ -2,6 +2,7 @@ import { Box, Flex, Text } from '@chakra-ui/react';
 
 import Link from 'next/link';
 import { BsBank2 } from 'react-icons/bs';
+import CommonConstants from '../../constants/CommonConstants';
 
 export default function Logo() {
   return (
@@ -16,7 +17,7 @@ export default function Logo() {
       <Box mr={2}>
         <BsBank2 />
       </Box>
-      <Text fontWeight="semibold">NextGen Bank</Text>
+      <Text fontWeight="semibold">{CommonConstants.LOGO}</Text>
     </Flex>
   );
 }

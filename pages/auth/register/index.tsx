@@ -5,8 +5,8 @@ import { useToast } from '@chakra-ui/react';
 
 import { addUser } from '../../../src/api';
 
-import Routes from '../../../src/constants/routes';
-import CommonConstants from '../../../src/constants/common';
+import Routes from '../../../src/constants/Routes';
+import CommonConstants from '../../../src/constants/CommonConstants';
 
 import { AddNewUserMutation } from '../../../src/types';
 import { isExistingEmailUsed } from '../../../src/utils';

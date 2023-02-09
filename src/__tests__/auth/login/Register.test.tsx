@@ -6,7 +6,7 @@ import {
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import RegisterInputForm from '../../../components/organisms/RegisterForm';
-import registerConstants from '../../../constants/registerConstants';
+import registerConstants from '../../../constants/RegisterConstants';
 
 const setup = () => {
   const mockSignup = jest.fn((data) => {

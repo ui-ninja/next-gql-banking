@@ -19,6 +19,8 @@ import RadioCard from '../molecules/RadioCard';
 
 import { ACCOUNT_CATEGORIES, ACCOUNT_TYPE, NewAccountForm } from '../../types';
 import { GetUserQuery } from '../../generated/graphql';
+import OpenNewAccountConstants from '../../constants/OpenNewAccount';
+import CommonConstants from '../../constants/CommonConstants';
 
 type Props = {
   data: GetUserQuery;
@@ -55,12 +57,14 @@ export default function OpenNewAccountForm({ data, onCreateAccount }: Props) {
 
   return (
     <Box maxW={['100%', '100%', '50%']} marginX="auto">
-      <H1>Open new account</H1>
+      <H1>{OpenNewAccountConstants.PAGE_HEADING}</H1>
       <Divider mt="2" mb="10" borderColor="black" />
 
       <form onSubmit={handleSubmit(onFormSubmit)} noValidate>
         <FormControl mt="4">
-          <FormLabel htmlFor="name">Name</FormLabel>
+          <FormLabel htmlFor="name">
+            {OpenNewAccountConstants.NAME_LABEL}
+          </FormLabel>
           <Input
             variant="filled"
             isReadOnly
@@ -70,7 +74,9 @@ export default function OpenNewAccountForm({ data, onCreateAccount }: Props) {
         </FormControl>
 
         <FormControl mt="4">
-          <FormLabel htmlFor="email">Email</FormLabel>
+          <FormLabel htmlFor="email">
+            {OpenNewAccountConstants.EMAIL_LABEL}
+          </FormLabel>
           <Input
             type="email"
             variant="filled"
@@ -81,7 +87,9 @@ export default function OpenNewAccountForm({ data, onCreateAccount }: Props) {
         </FormControl>
 
         <FormControl mt="4">
-          <FormLabel htmlFor="phone">Phone</FormLabel>
+          <FormLabel htmlFor="phone">
+            {OpenNewAccountConstants.PHONE_LABEL}
+          </FormLabel>
           <Input
             variant="filled"
             isReadOnly
@@ -94,11 +102,13 @@ export default function OpenNewAccountForm({ data, onCreateAccount }: Props) {
           name="type"
           control={control}
           rules={{
-            required: 'You must select an account type',
+            required: OpenNewAccountConstants.ACCOUNT_TYPE_REQUIRED_MESSAGE,
           }}
           render={({ field, formState: { errors } }) => (
             <FormControl mt="4" isInvalid={Boolean(errors.type)}>
-              <FormLabel htmlFor="type">Type</FormLabel>
+              <FormLabel htmlFor="type">
+                {OpenNewAccountConstants.ACCOUNT_TYPE_LABEL}
+              </FormLabel>
               <Select {...field} data-testid="account_type_field">
                 <option value={ACCOUNT_TYPE.SAVINGS}>Savings</option>
                 <option value={ACCOUNT_TYPE.CREDIT_CARD}>Credit card</option>
@@ -114,7 +124,7 @@ export default function OpenNewAccountForm({ data, onCreateAccount }: Props) {
           name="category"
           control={control}
           rules={{
-            required: 'You must select an account category',
+            required: OpenNewAccountConstants.ACCOUNT_CATEGORY_REQUIRED_MESSAGE,
             validate: (value) => {
               const userIncome = data?.user.income;
               if (userIncome && value === ACCOUNT_CATEGORIES.GOLD) {
@@ -129,7 +139,10 @@ export default function OpenNewAccountForm({ data, onCreateAccount }: Props) {
           render={({ field, formState: { errors } }) => (
             <FormControl mt="4" isInvalid={Boolean(errors.category)}>
               <FormLabel htmlFor="type">
-                Category &lt;{isCreditCardSelected ? 'Credit card' : 'Savings'}
+                {OpenNewAccountConstants.ACCOUNT_CATEGORY_LABEL} &lt;
+                {isCreditCardSelected
+                  ? CommonConstants.CREDIT_CARD
+                  : CommonConstants.SAVINGS}
                 &gt;
               </FormLabel>
               <RadioGroup {...field}>
@@ -137,14 +150,18 @@ export default function OpenNewAccountForm({ data, onCreateAccount }: Props) {
                   {isCreditCardSelected ? (
                     <>
                       <RadioCard
-                        description="Credit limit is Rs. 50,000 and annual charges are Rs. 1,000."
+                        description={
+                          OpenNewAccountConstants.CREDIT_CARD_GOLD_DESC
+                        }
                         value={ACCOUNT_CATEGORIES.GOLD}
                       >
                         Gold
                       </RadioCard>
                       <RadioCard
                         value={ACCOUNT_CATEGORIES.PLATINUM}
-                        description="Credit limit is Rs. 150,000 and annual charges are Rs. 2,500."
+                        description={
+                          OpenNewAccountConstants.CREDIT_CARD_PLATINUM_DESC
+                        }
                       >
                         Platinum
                       </RadioCard>
@@ -152,13 +169,17 @@ export default function OpenNewAccountForm({ data, onCreateAccount }: Props) {
                   ) : (
                     <>
                       <RadioCard
-                        description="comes with ZERO minimum balance"
+                        description={
+                          OpenNewAccountConstants.SAVINGS_REGULAR_DESC
+                        }
                         value={ACCOUNT_CATEGORIES.REGULAR}
                       >
                         Regular
                       </RadioCard>
                       <RadioCard
-                        description="You must maintain a minimum balance of Rs. 10,000."
+                        description={
+                          OpenNewAccountConstants.SAVINGS_PREMIUM_DESC
+                        }
                         value={ACCOUNT_CATEGORIES.PREMIUM}
                       >
                         Premium

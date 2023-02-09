@@ -21,19 +21,15 @@ export const authOptions: NextAuthOptions = {
             await UserModel.findOne({ email });
 
           if (!user) {
-            console.log(
-              'User with given credentials not found, please signup first.'
-            );
             return null;
           }
           const comparePwd = await bcrypt.compare(password, user.password);
           if (!comparePwd) {
-            console.log('uername or password does not match');
             return null;
           }
           return user;
         } catch (error) {
-          console.log('error', error);
+          console.error('error', error);
           return null;
         }
       },

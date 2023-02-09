@@ -4,8 +4,8 @@ import { getCsrfToken, signIn } from 'next-auth/react';
 
 import { LoginForm } from '../../../src/types';
 
-import Routes from '../../../src/constants/routes';
-import CommonConstants from '../../../src/constants/common';
+import Routes from '../../../src/constants/Routes';
+import CommonConstants from '../../../src/constants/CommonConstants';
 import LoginInputForm from '../../../src/components/organisms/LoginForm';
 
 export async function getServerSideProps(context: any) {

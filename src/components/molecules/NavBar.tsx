@@ -1,13 +1,14 @@
 import { Flex, Icon, Text } from '@chakra-ui/react';
 import { signOut, useSession } from 'next-auth/react';
 import NextLink from 'next/link';
-import Routes from '../../constants/routes';
-import Button from '../atoms/Button';
-
-import Link from '../atoms/Link';
-import { MdLogout } from 'react-icons/md';
 import { useRouter } from 'next/router';
-import CommonConstants from '../../constants/common';
+import { MdLogout } from 'react-icons/md';
+
+import Routes from '../../constants/Routes';
+import CommonConstants from '../../constants/CommonConstants';
+
+import Button from '../atoms/Button';
+import Link from '../atoms/Link';
 
 export default function NavBar() {
   const { data: session } = useSession();
@@ -30,7 +31,7 @@ export default function NavBar() {
             ml={3}
             isActive={routerPathname === Routes.DASHBOARD}
           >
-            <Text fontSize="md">Dashboard</Text>
+            <Text fontSize="md">{CommonConstants.DASHBOARD}</Text>
           </Link>
           <Link
             as={NextLink}
@@ -39,7 +40,7 @@ export default function NavBar() {
             ml={3}
             isActive={routerPathname === Routes.OPEN_NEW_ACCOUNT}
           >
-            <Text fontSize="md">Open new account</Text>
+            <Text fontSize="md">{CommonConstants.OPEN_NEW_ACCOUNT}</Text>
           </Link>
           <Button
             ml={3}

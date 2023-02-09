@@ -1,4 +1,4 @@
-const loginConstants = {
+const LoginConstants = {
   LOGIN_PAGE_HEADING: 'Log in to your account',
   EMAIL_LABEL: 'Email address',
   EMAIL_REGEX: /\S+@\S+\.\S+/,
@@ -10,4 +10,4 @@ const loginConstants = {
   PASSWORD_PLACEHOLDER: 'Enter your password',
 };
 
-export default loginConstants;
+export default LoginConstants;

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { H1 } from '../src/components/atoms/typography';
 import CustomLink from '../src/components/atoms/Link';
 
-import CommonConstants from '../src/constants/common';
+import CommonConstants from '../src/constants/CommonConstants';
 
 export default function Generic404ErrorPage() {
   return (

@@ -6,7 +6,7 @@ import { H3 } from '../atoms/typography';
 
 import { Account } from '../../generated/graphql';
 
-import Routes from '../../constants/routes';
+import Routes from '../../constants/Routes';
 import Illustration from '../../images/Business.svg';
 
 export default function AccountCard({
@@ -24,7 +24,7 @@ export default function AccountCard({
         border="1px solid"
         borderColor="gray.100"
         _hover={{
-          transform: 'translateY(-5px)',
+          transform: 'translateY(-4px)',
           transition: 'all ease 0.3s',
         }}
       >

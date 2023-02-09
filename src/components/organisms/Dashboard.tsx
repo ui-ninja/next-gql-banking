@@ -14,7 +14,8 @@ import { H1, H3, H4 } from '../atoms/typography';
 import AccountCard from '../molecules/AccountCard';
 import PaymentCard from '../molecules/PaymentCard';
 
-import Routes from '../../constants/routes';
+import Routes from '../../constants/Routes';
+import DashboardConstants from '../../constants/DashboardConstants';
 
 type Props = {
   isLoading: boolean;
@@ -25,7 +26,7 @@ export default function Dashboard({ isLoading, data }: Props) {
   if (isLoading) {
     return (
       <H4>
-        <Spinner /> Fetching your accounts..
+        <Spinner /> {DashboardConstants.FETCHING_ACCOUNTS}
       </H4>
     );
   }
@@ -33,12 +34,11 @@ export default function Dashboard({ isLoading, data }: Props) {
   if (!data) {
     return (
       <>
-        <H1>Welcome to NextGen banking!</H1>
+        <H1>{DashboardConstants.PAGE_HEADING}</H1>
         <Alert status="info">
           <AlertIcon />
           <AlertDescription>
-            It seems you do not have an account with us at the moment, you can
-            open a Savings or credit account with us by{' '}
+            {DashboardConstants.NO_ACCOUNT_ALERT_DESC}
             <Link href={Routes.OPEN_NEW_ACCOUNT}>clicking here</Link>.
           </AlertDescription>
         </Alert>
@@ -63,7 +63,7 @@ export default function Dashboard({ isLoading, data }: Props) {
 
   return (
     <>
-      <H1>Welcome to NextGen banking!</H1>
+      <H1>{DashboardConstants.PAGE_HEADING}</H1>
       <Box>
         <Grid as="ul" templateColumns="repeat(auto-fit, min(340px))" gap={6}>
           {data?.account.map((item) => {
@@ -88,7 +88,7 @@ export default function Dashboard({ isLoading, data }: Props) {
 
       {dataSet?.cards.length && (
         <Box mt={10}>
-          <H3>Your Cards:</H3>
+          <H3>{DashboardConstants.YOUR_CARDS}</H3>
           <Grid templateColumns="repeat(auto-fit, min(335px))" gap={6} as="ul">
             {dataSet?.cards.map((item) => {
               return (

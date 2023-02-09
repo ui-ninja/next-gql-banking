@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { GetServerSideProps } from 'next';
-import { dehydrate, useQuery } from 'react-query';
+import { dehydrate } from 'react-query';
 import {
   Alert,
   AlertDescription,
@@ -17,12 +18,15 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react';
+
+import useTransactions from '../../src/hooks/useTransactions';
+
 import { queryClient, transactions } from '../../src/api';
 
 import { H1, H4 } from '../../src/components/atoms/typography';
 import Button from '../../src/components/atoms/Button';
-import { useState } from 'react';
-import useTransactions from '../../src/hooks/useTransactions';
+import transactionConstants from '../../src/constants/TransactionConstants';
+import CommonConstants from '../../src/constants/CommonConstants';
 
 const PAGE_SIZE = 10;
 
@@ -72,13 +76,13 @@ function Transactions({ accountId }: { accountId: string }) {
     return (
       <H1>
         <Spinner mr={5} />
-        Loading results...
+        {transactionConstants.LOADING_RESULTS}
       </H1>
     );
   }
 
   if (isError || !data?.transactions) {
-    return <H1>Error while fetching transactions, please try again.</H1>;
+    return <H1>{transactionConstants.ERROR_WHILE_FETCHING}</H1>;
   }
 
   const {
@@ -104,29 +108,29 @@ function Transactions({ accountId }: { accountId: string }) {
     }));
   };
 
+  const isPreviousBtnDisabled = activePageNumber === 1;
+  const isNextbtnDisabled = !hasNextPage;
+
   return (
     <Box>
       <Alert status="info">
         <AlertIcon />
-        <AlertTitle>This page uses dummy data!</AlertTitle>
+        <AlertTitle>{transactionConstants.DUMMY_DATA_ALERT_TITLE}</AlertTitle>
         <AlertDescription>
-          Even though this page accepts <code>accountId</code>, it does not
-          filter based on <code>accountId</code> due to lack of data points.
-          But, this page follow cursor based pagination as per{' '}
-          <code>Relay</code> specifications.
+          {transactionConstants.DUMMY_DATA_ALERT_DESCRIPTION}
         </AlertDescription>
       </Alert>
-      <H1>Transactions</H1>
+      <H1>{transactionConstants.PAGE_HEADING}</H1>
       <TableContainer>
         <Table variant="striped" colorScheme="gray">
-          <TableCaption>Transaction data (10 per page)</TableCaption>
+          <TableCaption>
+            {transactionConstants.TRANSACTIONS_TABLE_CAPTION}
+          </TableCaption>
           <Thead>
             <Tr>
-              <Th>S.no.</Th>
-              <Th>Id</Th>
-              <Th>Transaction done on</Th>
-              <Th>Type</Th>
-              <Th>Amount</Th>
+              {transactionConstants.TRANSACTIONS_TABLE_COLUMNS.map((col) => (
+                <Th key={col}>{col}</Th>
+              ))}
             </Tr>
           </Thead>
           <Tbody>
@@ -146,18 +150,18 @@ function Transactions({ accountId }: { accountId: string }) {
       <Center>
         <Button
           variant="primary"
-          disabled={activePageNumber === 1}
+          isDisabled={isPreviousBtnDisabled}
           onClick={handlePreviousPage}
         >
-          Prev.
+          {CommonConstants.PREVIOUS}
         </Button>
         <H4 mx={5}>Page {activePageNumber}</H4>
         <Button
           variant="primary"
-          disabled={!hasNextPage}
+          isDisabled={isNextbtnDisabled}
           onClick={handleNextPage}
         >
-          Next
+          {CommonConstants.NEXT}
         </Button>
       </Center>
     </Box>
