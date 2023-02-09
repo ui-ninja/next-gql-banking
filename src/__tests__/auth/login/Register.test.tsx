@@ -6,7 +6,7 @@ import {
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import RegisterInputForm from '../../../components/organisms/RegisterForm';
-import registerConstants from '../../../constants/RegisterConstants';
+import RegisterConstants from '../../../constants/registerConstants';
 
 const setup = () => {
   const mockSignup = jest.fn((data) => {
@@ -19,19 +19,19 @@ const setup = () => {
     name: /Sign up/i,
   });
   return {
-    nameInput: utils.getByPlaceholderText(registerConstants.NAME_PLACEHOLDER),
-    emailInput: utils.getByPlaceholderText(registerConstants.EMAIL_PLACEHOLDER),
+    nameInput: utils.getByPlaceholderText(RegisterConstants.NAME_PLACEHOLDER),
+    emailInput: utils.getByPlaceholderText(RegisterConstants.EMAIL_PLACEHOLDER),
     passwordInput: utils.getByPlaceholderText(
-      registerConstants.PASSWORD_PLACEHOLDER
+      RegisterConstants.PASSWORD_PLACEHOLDER
     ),
-    phoneInput: utils.getByPlaceholderText(registerConstants.PHONE_PLACEHOLDER),
+    phoneInput: utils.getByPlaceholderText(RegisterConstants.PHONE_PLACEHOLDER),
     residenceInput: utils.getByPlaceholderText(
-      registerConstants.RESIDENCE_PLACEHOLDER
+      RegisterConstants.RESIDENCE_PLACEHOLDER
     ),
     occupationSelectBox: utils.getByTestId('occupation_field'),
     incomeSelectBox: utils.getByTestId('income_field'),
     govtIdInput: utils.getByPlaceholderText(
-      registerConstants.GOVTID_PLACEHOLDER
+      RegisterConstants.GOVTID_PLACEHOLDER
     ),
     signupBtn,
     mockSignup,
@@ -79,13 +79,13 @@ describe('Register page testing suite', () => {
     await waitForElementToBeRemoved(() => screen.queryByText(/loading/i));
 
     const emailValidationError = screen.queryByText(
-      registerConstants.EMAIL_NOT_VALID
+      RegisterConstants.EMAIL_NOT_VALID
     );
     const passwordValidationError = screen.queryByText(
-      registerConstants.PASSWORD_NOT_VALID
+      RegisterConstants.PASSWORD_NOT_VALID
     );
     const incomeValidationError = screen.queryByText(
-      registerConstants.INCOME_REQUIRED
+      RegisterConstants.INCOME_REQUIRED
     );
 
     expect(emailValidationError).toBeInTheDocument();
@@ -135,13 +135,13 @@ describe('Register page testing suite', () => {
     await waitForElementToBeRemoved(() => screen.queryByText(/loading/i));
 
     const emailValidationError = screen.queryByText(
-      registerConstants.EMAIL_NOT_VALID
+      RegisterConstants.EMAIL_NOT_VALID
     );
     const passwordValidationError = screen.queryByText(
-      registerConstants.PASSWORD_NOT_VALID
+      RegisterConstants.PASSWORD_NOT_VALID
     );
     const incomeValidationError = screen.queryByText(
-      registerConstants.INCOME_REQUIRED
+      RegisterConstants.INCOME_REQUIRED
     );
 
     expect(emailValidationError).not.toBeInTheDocument();

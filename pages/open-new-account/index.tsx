@@ -7,12 +7,12 @@ import { Text, useToast } from '@chakra-ui/react';
 import { addAccount, getUser, queryClient } from '../../src/api';
 import { authOptions } from '../api/auth/[...nextauth]';
 
-import Routes from '../../src/constants/Routes';
 import { NewAccountForm } from '../../src/types';
 
 import OpenNewAccountForm from '../../src/components/organisms/OpenNewAccountForm';
 import useUser from '../../src/hooks/useUser';
 import OpenNewAccountConstants from '../../src/constants/OpenNewAccount';
+import Routes from '../../src/constants/routes';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   // get user id from session

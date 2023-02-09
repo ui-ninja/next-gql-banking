@@ -14,10 +14,10 @@ import Button from '../../../src/components/atoms/Button';
 import Select from '../../../src/components/atoms/Select';
 import PasswordInput from '../../../src/components/molecules/PasswordInput';
 
-import RegisterConstants from '../../constants/RegisterConstants';
 import CommonConstants from '../../constants/CommonConstants';
 
 import { AddNewUserMutation, RegisterForm } from '../../../src/types';
+import RegisterConstants from '../../constants/registerConstants';
 
 export default function RegisterInputForm({
   onSignup,

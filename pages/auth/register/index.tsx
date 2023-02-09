@@ -5,12 +5,12 @@ import { useToast } from '@chakra-ui/react';
 
 import { addUser } from '../../../src/api';
 
-import Routes from '../../../src/constants/Routes';
 import CommonConstants from '../../../src/constants/CommonConstants';
 
 import { AddNewUserMutation } from '../../../src/types';
 import { isExistingEmailUsed } from '../../../src/utils';
 import RegisterInputForm from '../../../src/components/organisms/RegisterForm';
+import Routes from '../../../src/constants/routes';
 
 export default function Register() {
   const toast = useToast();

@@ -4,8 +4,8 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { MdLogout } from 'react-icons/md';
 
-import Routes from '../../constants/Routes';
 import CommonConstants from '../../constants/CommonConstants';
+import Routes from '../../constants/routes';
 
 import Button from '../atoms/Button';
 import Link from '../atoms/Link';

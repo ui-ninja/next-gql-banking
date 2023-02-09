@@ -14,8 +14,8 @@ import { H1, H3, H4 } from '../atoms/typography';
 import AccountCard from '../molecules/AccountCard';
 import PaymentCard from '../molecules/PaymentCard';
 
-import Routes from '../../constants/Routes';
 import DashboardConstants from '../../constants/DashboardConstants';
+import Routes from '../../constants/routes';
 
 type Props = {
   isLoading: boolean;

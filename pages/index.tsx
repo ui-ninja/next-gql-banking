@@ -7,9 +7,9 @@ import Button from '../src/components/atoms/Button';
 import { H1, H3 } from '../src/components/atoms/typography';
 import FeatureCard from '../src/components/molecules/FeatureCard';
 
-import Routes from '../src/constants/Routes';
 import CommonConstants from '../src/constants/CommonConstants';
 import HomeConstants from '../src/constants/HomeConstants';
+import Routes from '../src/constants/routes';
 
 export default function Home() {
   const router = useRouter();
