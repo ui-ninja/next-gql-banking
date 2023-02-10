@@ -1,13 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FC, ReactElement } from "react";
 
 type ErrorBoundaryProps = {
   onError?: (x: unknown, y: unknown) => void;
-  FallbackComponent: FC<unknown>;
+  FallbackComponent: FC<any>;
   children: ReactElement;
 };
 
-class ErrorBoundary extends React.Component<ErrorBoundaryProps> {
-  constructor(props) {
+class ErrorBoundary extends React.Component<
+  ErrorBoundaryProps,
+  { error: any }
+> {
+  constructor(props: ErrorBoundaryProps | Readonly<ErrorBoundaryProps>) {
     super(props);
     this.state = {
       error: null,

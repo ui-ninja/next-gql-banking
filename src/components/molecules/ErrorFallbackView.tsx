@@ -6,7 +6,8 @@ import CommonConstants from "../../constants/CommonConstants";
 
 const IS_DEV_ENV = process.env.NODE_ENV === "development";
 
-function ErrorFallbackView({ error }: { error: unknown }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function ErrorFallbackView({ error }: { error: any }) {
   return (
     <Box role="alert">
       <H3>{CommonConstants.ERROR_FALLBACK_VIEW_TITLE}</H3>
