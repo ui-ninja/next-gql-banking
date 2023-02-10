@@ -8,6 +8,8 @@ import { Account } from '../../generated/graphql';
 
 import Illustration from '../../images/Business.svg';
 import Routes from '../../constants/Routes';
+import { ACCOUNT_CATEGORIES, ACCOUNT_TYPE } from '../../types';
+import CommonConstants from '../../constants/CommonConstants';
 
 export default function AccountCard({
   id,
@@ -52,8 +54,19 @@ export default function AccountCard({
         </Box>
         <Box flexGrow={1} p={5}>
           <Flex justifyContent="space-between" mb={5} color="gray.500">
-            <Text fontWeight="semibold">{type}</Text>
-            <Text>{category}</Text>
+            <Text
+              color="blackAlpha.700"
+              fontSize="sm"
+              fontWeight="semibold"
+              textTransform="uppercase"
+            >
+              {type === ACCOUNT_TYPE.CREDIT_CARD
+                ? CommonConstants.CREDIT_CARD
+                : CommonConstants.SAVINGS}
+            </Text>
+            <Text color="blackAlpha.700" fontSize="sm">
+              {category}
+            </Text>
           </Flex>
           <Box>
             <H3 textTransform={'capitalize'}>{userName}</H3>
