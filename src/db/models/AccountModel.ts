@@ -1,11 +1,11 @@
-import mongoose, { model, models, Schema } from 'mongoose';
+import mongoose, { model, models, Schema } from "mongoose";
 
 const accountSchema = new Schema(
   {
     accountNumber: { type: Number, required: true, unique: true },
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
       required: true,
     },
     type: {
@@ -18,7 +18,7 @@ const accountSchema = new Schema(
     },
     card: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Card',
+      ref: "Card",
       required: true,
     },
   },
@@ -27,6 +27,6 @@ const accountSchema = new Schema(
   }
 );
 
-const AccountModel = models.Account || model('Account', accountSchema);
+const AccountModel = models.Account || model("Account", accountSchema);
 
 export default AccountModel;

@@ -1,15 +1,15 @@
-import { forwardRef } from 'react';
+import { ForwardedRef, forwardRef, LegacyRef } from "react";
 import {
   Input as ChakraInput,
   InputProps as ChakraInputProps,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
 type InputProps = {
-  ref?: React.LegacyRef<HTMLInputElement>;
+  ref?: LegacyRef<HTMLInputElement>;
 } & ChakraInputProps;
 
 const Input = forwardRef(
-  (props: InputProps, ref: React.ForwardedRef<HTMLInputElement>) => {
+  (props: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
     return (
       <ChakraInput
         ref={ref}
@@ -22,6 +22,6 @@ const Input = forwardRef(
   }
 );
 
-Input.displayName = 'Input';
+Input.displayName = "Input";
 
 export default Input;

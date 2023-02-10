@@ -1,18 +1,23 @@
 /* eslint-disable react/no-children-prop */
-import { forwardRef } from 'react';
+import {
+  ForwardedRef,
+  forwardRef,
+  HTMLInputTypeAttribute,
+  ReactNode,
+} from "react";
 import {
   InputGroup,
   InputLeftElement,
   InputProps,
   InputRightElement,
-} from '@chakra-ui/react';
-import Input from './Input';
+} from "@chakra-ui/react";
+import Input from "./Input";
 
 type Props = InputProps & {
-  variant?: 'primary' | 'rounded';
-  type?: React.HTMLInputTypeAttribute;
-  leftIcon?: React.ReactNode;
-  rightIcon?: React.ReactNode;
+  variant?: "primary" | "rounded";
+  type?: HTMLInputTypeAttribute;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
   placeholder?: string;
 };
 
@@ -20,13 +25,13 @@ const InputWithIcon = forwardRef(
   (
     {
       variant,
-      type = 'text',
+      type = "text",
       leftIcon,
       rightIcon,
       placeholder,
       ...rest
     }: Props,
-    ref: React.ForwardedRef<HTMLInputElement>
+    ref: ForwardedRef<HTMLInputElement>
   ) => (
     <InputGroup>
       {leftIcon && (
@@ -47,6 +52,6 @@ const InputWithIcon = forwardRef(
   )
 );
 
-InputWithIcon.displayName = 'InputWithIcon';
+InputWithIcon.displayName = "InputWithIcon";
 
 export default InputWithIcon;

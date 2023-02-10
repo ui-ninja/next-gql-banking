@@ -1,5 +1,5 @@
-import { useQuery } from 'react-query';
-import { transactions } from '../api';
+import { useQuery } from "react-query";
+import { transactions } from "../api";
 
 export default function useTransactions(
   accountId: string,
@@ -8,7 +8,7 @@ export default function useTransactions(
   pageSize: number
 ) {
   const { data, isLoading, isError, error, refetch } = useQuery(
-    ['transactions', nextCursor, previousCursor],
+    ["transactions", nextCursor, previousCursor],
     () => {
       return transactions({
         accountId,

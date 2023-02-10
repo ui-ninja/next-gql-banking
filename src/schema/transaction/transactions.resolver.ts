@@ -1,15 +1,15 @@
-import { Arg, Query, Resolver } from 'type-graphql';
-import { Transactions } from './transactions';
-import dummyTransactionData from './dummyData.json';
+import { Arg, Query, Resolver } from "type-graphql";
+import { Transactions } from "./transactions";
+import dummyTransactionData from "./dummyData.json";
 
 @Resolver(Transactions)
 export class TransactionsResolver {
   @Query(() => Transactions)
   async transactions(
-    @Arg('accountId') accountId: string,
-    @Arg('first') first: number,
-    @Arg('after', { nullable: true }) after: string,
-    @Arg('before', { nullable: true }) before: string
+    @Arg("accountId") accountId: string,
+    @Arg("first") first: number,
+    @Arg("after", { nullable: true }) after: string,
+    @Arg("before", { nullable: true }) before: string
   ): Promise<Transactions> {
     let results = null;
 
@@ -69,14 +69,13 @@ export class TransactionsResolver {
           node: item,
         })),
       };
-    } else {
-      return {
-        edges: [],
-        pageInfo: {
-          endCursor: '',
-          hasNextPage: false,
-        },
-      };
     }
+    return {
+      edges: [],
+      pageInfo: {
+        endCursor: "",
+        hasNextPage: false,
+      },
+    };
   }
 }

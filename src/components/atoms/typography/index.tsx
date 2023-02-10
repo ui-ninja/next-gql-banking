@@ -1,4 +1,4 @@
-import { Text, TextProps } from '@chakra-ui/react';
+import { Text, TextProps } from "@chakra-ui/react";
 
 type Props = TextProps;
 
@@ -19,7 +19,7 @@ export function H1({ children, ...props }: Props) {
 
 export function H3({ children, ...props }: Props) {
   return (
-    <Text as="h3" fontSize="xl" fontWeight={'semibold'} my={4} {...props}>
+    <Text as="h3" fontSize="xl" fontWeight="semibold" my={4} {...props}>
       {children}
     </Text>
   );

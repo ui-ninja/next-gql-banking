@@ -1,16 +1,16 @@
-import { useRouter } from 'next/router';
-import { signIn } from 'next-auth/react';
-import { useMutation } from 'react-query';
-import { useToast } from '@chakra-ui/react';
+import { useRouter } from "next/router";
+import { signIn } from "next-auth/react";
+import { useMutation } from "react-query";
+import { useToast } from "@chakra-ui/react";
 
-import { addUser } from '../../../src/api';
+import { addUser } from "../../../src/api";
 
-import CommonConstants from '../../../src/constants/CommonConstants';
+import CommonConstants from "../../../src/constants/CommonConstants";
 
-import { AddNewUserMutation } from '../../../src/types';
-import { isExistingEmailUsed } from '../../../src/utils';
-import RegisterInputForm from '../../../src/components/organisms/RegisterForm';
-import Routes from '../../../src/constants/Routes';
+import { AddNewUserMutation } from "../../../src/types";
+import { isExistingEmailUsed } from "../../../src/utils";
+import RegisterInputForm from "../../../src/components/organisms/RegisterForm";
+import Routes from "../../../src/constants/Routes";
 
 export default function Register() {
   const toast = useToast();
@@ -29,14 +29,14 @@ export default function Register() {
           toast({
             title: CommonConstants.ACCOUNT_CREATED,
             description: CommonConstants.REDIRECT_TO_DASHBOARD,
-            status: 'success',
+            status: "success",
           });
           // sign in user with nextAuth
-          const status = await signIn('credentials', {
+          const status = await signIn("credentials", {
             redirect: false,
             email,
             password,
-            callbackUrl: '/',
+            callbackUrl: "/",
           });
 
           if (status?.ok) {
@@ -53,7 +53,7 @@ export default function Register() {
           description: isExistingEmailUsed(error)
             ? CommonConstants.EMAIL_ALREADY_IN_USE
             : CommonConstants.SIGNUP_FAILED,
-          status: 'error',
+          status: "error",
           isClosable: true,
         });
       },

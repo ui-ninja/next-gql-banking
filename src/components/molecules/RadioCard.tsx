@@ -1,9 +1,9 @@
-import { forwardRef } from 'react';
-import { Box, RadioProps as ChakraRadioProps } from '@chakra-ui/react';
-import Radio from '../atoms/Radio';
+import { forwardRef, LegacyRef } from "react";
+import { Box, RadioProps as ChakraRadioProps } from "@chakra-ui/react";
+import Radio from "../atoms/Radio";
 
 type RadioProps = {
-  ref?: React.LegacyRef<HTMLInputElement>;
+  ref?: LegacyRef<HTMLInputElement>;
   description?: string;
 } & ChakraRadioProps;
 
@@ -25,6 +25,6 @@ const RadioCard = forwardRef((props: RadioProps, ref) => {
   );
 });
 
-RadioCard.displayName = 'RadioCard';
+RadioCard.displayName = "RadioCard";
 
 export default RadioCard;

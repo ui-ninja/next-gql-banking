@@ -1,4 +1,4 @@
-import { withAuth } from 'next-auth/middleware';
+import { withAuth } from "next-auth/middleware";
 
 export default withAuth({
   callbacks: {
@@ -9,5 +9,5 @@ export default withAuth({
 });
 
 export const config = {
-  matcher: ['/dashboard', '/transactions/:accountId*', '/open-new-account'],
+  matcher: ["/dashboard", "/transactions/:accountId*", "/open-new-account"],
 };

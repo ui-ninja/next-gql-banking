@@ -1,8 +1,8 @@
 export const formatCardNumber = (value: number) => {
   const cardNumber = String(value);
-  const v = cardNumber.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+  const v = cardNumber.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
   const matches = v.match(/\d{4,16}/g);
-  const match = (matches && matches[0]) || '';
+  const match = (matches && matches[0]) || "";
   const parts = [];
 
   for (let i = 0, len = match.length; i < len; i += 4) {
@@ -10,12 +10,12 @@ export const formatCardNumber = (value: number) => {
   }
 
   if (parts.length) {
-    return parts.join(' ');
-  } else {
-    return value;
+    return parts.join(" ");
   }
+  return value;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isExistingEmailUsed = (error: any) => {
   return (
     error?.response?.errors &&

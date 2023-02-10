@@ -1,7 +1,7 @@
-import { Box, Flex, Icon, Text } from '@chakra-ui/react';
-import { RiVisaLine } from 'react-icons/ri';
-import { Card } from '../../generated/graphql';
-import { formatCardNumber } from '../../utils';
+import { Box, Flex, Icon, Text } from "@chakra-ui/react";
+import { RiVisaLine } from "react-icons/ri";
+import { Card } from "../../generated/graphql";
+import { formatCardNumber } from "../../utils";
 
 export default function PaymentCard({
   cardNumber,
@@ -20,29 +20,29 @@ export default function PaymentCard({
       color="white"
       borderRadius={20}
       backgroundColor="#633EF8"
-      overflow={'hidden'}
+      overflow="hidden"
       boxShadow="md"
       _before={{
-        display: 'block',
+        display: "block",
         content: '""',
-        backgroundColor: '#8567FF',
-        width: '400px',
-        height: '400px',
-        borderRadius: '50%',
-        position: 'absolute',
-        left: '50%',
-        top: '-20%',
+        backgroundColor: "#8567FF",
+        width: "400px",
+        height: "400px",
+        borderRadius: "50%",
+        position: "absolute",
+        left: "50%",
+        top: "-20%",
       }}
       _after={{
-        display: 'block',
+        display: "block",
         content: '""',
-        backgroundColor: '#7856FF',
-        width: '300px',
-        height: '300px',
-        borderRadius: '50%',
-        position: 'absolute',
-        left: '54%',
-        top: '30%',
+        backgroundColor: "#7856FF",
+        width: "300px",
+        height: "300px",
+        borderRadius: "50%",
+        position: "absolute",
+        left: "54%",
+        top: "30%",
       }}
     >
       <Flex
@@ -53,20 +53,20 @@ export default function PaymentCard({
         alignItems="center"
         justifyContent="center"
       >
-        <Box pos="absolute" right={0} top={'-20px'}>
+        <Box pos="absolute" right={0} top="-20px">
           <Icon
             as={RiVisaLine}
             color="white"
-            fontSize={['4xl', '4xl', '6xl']}
+            fontSize={["4xl", "4xl", "6xl"]}
           />
         </Box>
-        <Text fontSize={['xl', 'xl', '2xl']} textAlign="center">
+        <Text fontSize={["xl", "xl", "2xl"]} textAlign="center">
           {formattedCardNumber}
         </Text>
-        <Text fontSize={'md'} textAlign="center">
+        <Text fontSize="md" textAlign="center">
           {expiryMonth}/{expiryYear}
         </Text>
-        <Text pos="absolute" left={'10px'} bottom={'10px'}>
+        <Text pos="absolute" left="10px" bottom="10px">
           {userName}
         </Text>
       </Flex>

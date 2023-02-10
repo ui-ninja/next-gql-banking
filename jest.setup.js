@@ -1,6 +1,6 @@
-jest.mock('next/router', () => require('next-router-mock'));
+jest.mock("next/router", () => require("next-router-mock"));
 
-Object.defineProperty(window, 'matchMedia', {
+Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: jest.fn().mockImplementation((query) => ({
     matches: false,

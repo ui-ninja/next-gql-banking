@@ -1,5 +1,5 @@
-import { model, models, Schema } from 'mongoose';
-import bcrypt from 'bcrypt';
+import { model, models, Schema } from "mongoose";
+import bcrypt from "bcrypt";
 
 const cardSchema = new Schema(
   {
@@ -26,14 +26,14 @@ const cardSchema = new Schema(
   }
 );
 
-cardSchema.pre('save', async function (next) {
-  if (this.cvv && this.isModified('cvv')) {
+cardSchema.pre("save", async function (next) {
+  if (this.cvv && this.isModified("cvv")) {
     const salt = await bcrypt.genSalt(10);
     this.cvv = await bcrypt.hash(this.cvv, salt);
   }
   next();
 });
 
-const CardModel = models.Card || model('Card', cardSchema);
+const CardModel = models.Card || model("Card", cardSchema);
 
 export default CardModel;

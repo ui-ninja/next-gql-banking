@@ -4,20 +4,18 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
-  useToast,
-} from '@chakra-ui/react';
-import { useRouter } from 'next/router';
-import { Controller, useForm } from 'react-hook-form';
+} from "@chakra-ui/react";
+import { Controller, useForm } from "react-hook-form";
 
-import { H1 } from '../../../src/components/atoms/typography';
-import Input from '../../../src/components/atoms/Input';
-import Button from '../../../src/components/atoms/Button';
-import PasswordInput from '../../../src/components/molecules/PasswordInput';
+import { H1 } from "../atoms/typography";
+import Input from "../atoms/Input";
+import Button from "../atoms/Button";
+import PasswordInput from "../molecules/PasswordInput";
 
-import { LoginForm } from '../../../src/types';
+import { LoginForm } from "../../types";
 
-import CommonConstants from '../../constants/CommonConstants';
-import LoginConstants from '../../constants/LoginConstants';
+import CommonConstants from "../../constants/CommonConstants";
+import LoginConstants from "../../constants/LoginConstants";
 
 export default function LoginInputForm({
   csrfToken,
@@ -31,23 +29,20 @@ export default function LoginInputForm({
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<LoginForm>({
-    mode: 'onChange',
+    mode: "onChange",
 
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
   });
-
-  const toast = useToast();
-  const router = useRouter();
 
   const onSubmit = async (data: LoginForm) => {
     await onLogin(data);
   };
 
   return (
-    <Box maxW={'sm'} margin="0 auto">
+    <Box maxW="sm" margin="0 auto">
       <H1>{LoginConstants.LOGIN_PAGE_HEADING}</H1>
 
       <Divider mt="2" mb="10" borderColor="black" />

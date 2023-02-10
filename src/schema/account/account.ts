@@ -1,6 +1,6 @@
-import { Field, ObjectType, InputType, ID } from 'type-graphql';
-import { Card } from '../card/card';
-import { User } from '../user/user';
+import { Field, ObjectType, InputType, ID } from "type-graphql";
+import { Card } from "../card/card";
+import { User } from "../user/user";
 
 @ObjectType()
 export class Account {

@@ -1,15 +1,15 @@
-import { forwardRef } from 'react';
+import { ForwardedRef, forwardRef, LegacyRef } from "react";
 import {
   Select as ChakraSelect,
   SelectProps as ChakraSelectProps,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
 type SelectProps = {
-  ref?: React.LegacyRef<HTMLSelectElement>;
+  ref?: LegacyRef<HTMLSelectElement>;
 } & ChakraSelectProps;
 
 const Select = forwardRef(
-  (props: SelectProps, ref: React.ForwardedRef<HTMLSelectElement>) => {
+  (props: SelectProps, ref: ForwardedRef<HTMLSelectElement>) => {
     return (
       <ChakraSelect
         ref={ref}
@@ -23,6 +23,6 @@ const Select = forwardRef(
   }
 );
 
-Select.displayName = 'Select';
+Select.displayName = "Select";
 
 export default Select;

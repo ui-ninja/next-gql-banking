@@ -1,5 +1,5 @@
-import React from 'react';
-import { Box, Container } from '@chakra-ui/react';
+import React from "react";
+import { Box, Container } from "@chakra-ui/react";
 
 export default function Main({ children }: { children: React.ReactElement }) {
   return (
@@ -8,7 +8,7 @@ export default function Main({ children }: { children: React.ReactElement }) {
       as="main"
       py="4"
       pb={14}
-      minH={'calc(100vh - 155px)'}
+      minH="calc(100vh - 155px)"
     >
       <Container maxW="container.xl">{children}</Container>
     </Box>

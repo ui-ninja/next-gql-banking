@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
 import {
   Box,
   Divider,
@@ -9,18 +9,18 @@ import {
   RadioGroup,
   Stack,
   Text,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import Button from '../atoms/Button';
-import Input from '../atoms/Input';
-import Select from '../atoms/Select';
-import { H1 } from '../atoms/typography';
-import RadioCard from '../molecules/RadioCard';
+import Button from "../atoms/Button";
+import Input from "../atoms/Input";
+import Select from "../atoms/Select";
+import { H1 } from "../atoms/typography";
+import RadioCard from "../molecules/RadioCard";
 
-import { ACCOUNT_CATEGORIES, ACCOUNT_TYPE, NewAccountForm } from '../../types';
-import { GetUserQuery } from '../../generated/graphql';
-import OpenNewAccountConstants from '../../constants/OpenNewAccount';
-import CommonConstants from '../../constants/CommonConstants';
+import { ACCOUNT_CATEGORIES, ACCOUNT_TYPE, NewAccountForm } from "../../types";
+import { GetUserQuery } from "../../generated/graphql";
+import OpenNewAccountConstants from "../../constants/OpenNewAccount";
+import CommonConstants from "../../constants/CommonConstants";
 
 type Props = {
   data: GetUserQuery;
@@ -36,7 +36,7 @@ export default function OpenNewAccountForm({ data, onCreateAccount }: Props) {
     setValue,
     formState: { isSubmitting },
   } = useForm<NewAccountForm>({
-    mode: 'onChange',
+    mode: "onChange",
     defaultValues: {
       type: ACCOUNT_TYPE.SAVINGS,
       category: undefined,
@@ -44,19 +44,19 @@ export default function OpenNewAccountForm({ data, onCreateAccount }: Props) {
   });
 
   // get value of type from watch
-  const accountTypeWatch = watch('type');
+  const accountTypeWatch = watch("type");
   const isCreditCardSelected = accountTypeWatch === ACCOUNT_TYPE.CREDIT_CARD;
 
   useEffect(() => {
-    return setValue('category', '');
+    return setValue("category", "");
   }, [accountTypeWatch, setValue]);
 
-  const onFormSubmit = (data: NewAccountForm) => {
-    return onCreateAccount(data);
+  const onFormSubmit = (result: NewAccountForm) => {
+    return onCreateAccount(result);
   };
 
   return (
-    <Box maxW={['100%', '100%', '50%']} marginX="auto">
+    <Box maxW={["100%", "100%", "50%"]} marginX="auto">
       <H1>{OpenNewAccountConstants.PAGE_HEADING}</H1>
       <Divider mt="2" mb="10" borderColor="black" />
 
@@ -134,6 +134,7 @@ export default function OpenNewAccountForm({ data, onCreateAccount }: Props) {
               if (userIncome && value === ACCOUNT_CATEGORIES.PLATINUM) {
                 return userIncome > 500000;
               }
+              return true;
             },
           }}
           render={({ field, formState: { errors } }) => (
@@ -190,15 +191,15 @@ export default function OpenNewAccountForm({ data, onCreateAccount }: Props) {
               </RadioGroup>
               <FormErrorMessage>
                 {errors.category &&
-                  errors.category.type === 'required' &&
+                  errors.category.type === "required" &&
                   errors.category.message}
                 {data?.user.income &&
                   errors.category &&
-                  errors.category.type === 'validate' && (
+                  errors.category.type === "validate" && (
                     <Text>
                       Based on your income declared i.e. {data?.user.income},
-                      you can select{' '}
-                      {data?.user.income > 500000 ? 'PLATINUM' : 'GOLD'} credit
+                      you can select{" "}
+                      {data?.user.income > 500000 ? "PLATINUM" : "GOLD"} credit
                       card only.
                     </Text>
                   )}
@@ -207,7 +208,7 @@ export default function OpenNewAccountForm({ data, onCreateAccount }: Props) {
           )}
         />
 
-        <input type="hidden" {...register('userId')} value={data?.user.id} />
+        <input type="hidden" {...register("userId")} value={data?.user.id} />
 
         <Button type="submit" mt="8" variant="primary" isLoading={isSubmitting}>
           Create account

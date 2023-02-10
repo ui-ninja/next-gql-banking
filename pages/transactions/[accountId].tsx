@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { GetServerSideProps } from 'next';
-import { dehydrate } from 'react-query';
+import { useState } from "react";
+import { GetServerSideProps } from "next";
+import { dehydrate } from "react-query";
 import {
   Alert,
   AlertDescription,
@@ -17,16 +17,16 @@ import {
   Th,
   Thead,
   Tr,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import useTransactions from '../../src/hooks/useTransactions';
+import useTransactions from "../../src/hooks/useTransactions";
 
-import { queryClient, transactions } from '../../src/api';
+import { queryClient, transactions } from "../../src/api";
 
-import { H1, H4 } from '../../src/components/atoms/typography';
-import Button from '../../src/components/atoms/Button';
-import transactionConstants from '../../src/constants/TransactionConstants';
-import CommonConstants from '../../src/constants/CommonConstants';
+import { H1, H4 } from "../../src/components/atoms/typography";
+import Button from "../../src/components/atoms/Button";
+import transactionConstants from "../../src/constants/TransactionConstants";
+import CommonConstants from "../../src/constants/CommonConstants";
 
 const PAGE_SIZE = 10;
 
@@ -34,16 +34,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!context.query?.accountId) {
     return {
       props: {
-        data: '',
+        data: "",
       },
     };
   }
 
-  await queryClient.prefetchQuery('transactions', () =>
+  await queryClient.prefetchQuery("transactions", () =>
     transactions({
       accountId: context.query.accountId as string,
-      after: '',
-      before: '',
+      after: "",
+      before: "",
       first: PAGE_SIZE,
     })
   );
@@ -64,8 +64,8 @@ function Transactions({
   pageSize?: number;
 }) {
   const [state, setState] = useState({
-    nextCursor: '',
-    previousCursor: '',
+    nextCursor: "",
+    previousCursor: "",
     activePageNumber: 1,
   });
 
@@ -102,14 +102,14 @@ function Transactions({
     setState((prevState) => ({
       activePageNumber: prevState.activePageNumber + 1,
       nextCursor: endCursor,
-      previousCursor: '',
+      previousCursor: "",
     }));
   };
 
   const handlePreviousPage = () => {
     setState((prevState) => ({
       activePageNumber: prevState.activePageNumber - 1,
-      nextCursor: '',
+      nextCursor: "",
       previousCursor: edges[0].cursor,
     }));
   };

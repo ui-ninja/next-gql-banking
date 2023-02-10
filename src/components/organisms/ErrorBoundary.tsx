@@ -1,17 +1,27 @@
-import React, { FC, ReactElement, ReactNode } from 'react';
+import React, { FC, ReactElement } from "react";
 
 type ErrorBoundaryProps = {
-  onError?: (x: any, y: any) => void;
-  FallbackComponent: FC<any>;
+  onError?: (x: unknown, y: unknown) => void;
+  FallbackComponent: FC<unknown>;
   children: ReactElement;
 };
 
 class ErrorBoundary extends React.Component<ErrorBoundaryProps> {
-  static getDerivedStateFromError(error: any) {
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+    };
+  }
+
+  static getDerivedStateFromError(error: unknown) {
     return { error };
   }
 
-  state = { error: null };
+  componentDidCatch(error: unknown, info: unknown) {
+    const { onError } = this.props;
+    onError?.(error, info);
+  }
 
   resetErrorBoundary = () => {
     this.reset();
@@ -19,10 +29,6 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps> {
 
   reset() {
     this.setState({ error: null });
-  }
-
-  componentDidCatch(error: any, info: any) {
-    this.props.onError?.(error, info);
   }
 
   render() {
@@ -38,11 +44,10 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps> {
       if (FallbackComponent) {
         // @ts-ignore
         return <FallbackComponent {...props} />;
-      } else {
-        throw new Error(
-          '<ErrorBoundary /> component requires a `FallbackComponent` prop'
-        );
       }
+      throw new Error(
+        "<ErrorBoundary /> component requires a `FallbackComponent` prop"
+      );
     }
 
     return children;
