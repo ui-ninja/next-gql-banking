@@ -1,15 +1,16 @@
-import { useToast } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
-import { getCsrfToken, signIn } from 'next-auth/react';
+import { useToast } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { getCsrfToken, signIn } from "next-auth/react";
+import { GetServerSidePropsContext } from "next";
 
-import { LoginForm } from '../../../src/types';
+import { LoginForm } from "../../../src/types";
 
-import LoginInputForm from '../../../src/components/organisms/LoginForm';
+import LoginInputForm from "../../../src/components/organisms/LoginForm";
 
-import CommonConstants from '../../../src/constants/CommonConstants';
-import Routes from '../../../src/constants/Routes';
+import CommonConstants from "../../../src/constants/CommonConstants";
+import Routes from "../../../src/constants/Routes";
 
-export async function getServerSideProps(context: any) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const csrfToken = await getCsrfToken(context);
   return {
     props: { csrfToken: csrfToken || null },
@@ -25,11 +26,11 @@ export default function Login({
   const router = useRouter();
 
   const onLogin = async (data: LoginForm) => {
-    const status = await signIn('credentials', {
+    const status = await signIn("credentials", {
       redirect: false,
       email: data.email,
       password: data.password,
-      callbackUrl: '/',
+      callbackUrl: "/",
     });
 
     if (status?.ok) {
@@ -38,7 +39,7 @@ export default function Login({
       toast({
         title: CommonConstants.ERROR_OCCURRED,
         description: CommonConstants.USERNAME_OR_PASSWORD_INVALID,
-        status: 'error',
+        status: "error",
       });
     }
   };

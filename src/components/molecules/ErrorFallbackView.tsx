@@ -1,11 +1,12 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Text } from "@chakra-ui/react";
 
-import { H3 } from '../atoms/typography';
+import { H3 } from "../atoms/typography";
 
-import CommonConstants from '../../constants/CommonConstants';
+import CommonConstants from "../../constants/CommonConstants";
 
-const IS_DEV_ENV = process.env.NODE_ENV === 'development';
+const IS_DEV_ENV = process.env.NODE_ENV === "development";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function ErrorFallbackView({ error }: { error: any }) {
   return (
     <Box role="alert">

@@ -1,10 +1,10 @@
-import { GraphQLClient } from 'graphql-request';
-import { QueryClient } from 'react-query';
+import { GraphQLClient } from "graphql-request";
+import { QueryClient } from "react-query";
 
-import { getSdk } from './generated/graphql';
+import { getSdk } from "./generated/graphql";
 
 const gqlClient = new GraphQLClient(
-  process.env.GRAPHQL_ENDPOINT || '/api/graphql'
+  process.env.GRAPHQL_ENDPOINT || "/api/graphql"
 );
 
 export const {

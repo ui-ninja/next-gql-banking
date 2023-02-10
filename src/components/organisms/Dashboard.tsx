@@ -5,17 +5,17 @@ import {
   Box,
   Grid,
   Spinner,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import { Account, GetAccountByUserIdQuery } from '../../generated/graphql';
+import { Account, GetAccountByUserIdQuery } from "../../generated/graphql";
 
-import Link from '../atoms/Link';
-import { H1, H3, H4 } from '../atoms/typography';
-import AccountCard from '../molecules/AccountCard';
-import PaymentCard from '../molecules/PaymentCard';
+import Link from "../atoms/Link";
+import { H1, H3, H4 } from "../atoms/typography";
+import AccountCard from "../molecules/AccountCard";
+import PaymentCard from "../molecules/PaymentCard";
 
-import DashboardConstants from '../../constants/DashboardConstants';
-import Routes from '../../constants/Routes';
+import DashboardConstants from "../../constants/DashboardConstants";
+import Routes from "../../constants/Routes";
 
 type Props = {
   isLoading: boolean;
@@ -48,17 +48,17 @@ export default function Dashboard({ isLoading, data }: Props) {
 
   const dataSet = data?.account.reduce(
     (acc, cv) => {
-      if (acc.hasOwnProperty('cards')) {
-        acc['cards'].push(cv.card);
+      if (Object.prototype.hasOwnProperty.call(acc, "cards")) {
+        acc.cards.push(cv.card);
       } else {
-        acc['cards'] = [cv.card];
+        acc.cards = [cv.card];
       }
 
-      acc['user'] = cv.user;
+      acc.user = cv.user;
 
       return acc;
     },
-    { cards: [] as Account['card'][], user: {} as Account['user'] }
+    { cards: [] as Account["card"][], user: {} as Account["user"] }
   );
 
   return (
@@ -78,7 +78,7 @@ export default function Dashboard({ isLoading, data }: Props) {
                   id={item.id}
                   type={item.type}
                   category={item.category}
-                  userName={dataSet?.user.name || ''}
+                  userName={dataSet?.user.name || ""}
                 />
               </Box>
             );

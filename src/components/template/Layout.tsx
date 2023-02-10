@@ -1,9 +1,10 @@
-import Head from 'next/head';
-import Footer from '../organisms/Footer';
-import Header from '../organisms/Header';
-import Main from '../organisms/Main';
+import { ReactElement } from "react";
+import Head from "next/head";
+import Footer from "../organisms/Footer";
+import Header from "../organisms/Header";
+import Main from "../organisms/Main";
 
-export default function Layout({ children }: { children: React.ReactElement }) {
+export default function Layout({ children }: { children: ReactElement }) {
   return (
     <>
       <Head>
@@ -11,7 +12,7 @@ export default function Layout({ children }: { children: React.ReactElement }) {
         <meta
           name="description"
           content="Welcome to next generation banking powered by React and GraphQL."
-        ></meta>
+        />
       </Head>
       <Header />
       <Main>{children}</Main>

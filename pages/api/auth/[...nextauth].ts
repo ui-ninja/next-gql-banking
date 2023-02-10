@@ -1,18 +1,18 @@
-import NextAuth, { NextAuthOptions } from 'next-auth';
-import bcrypt from 'bcrypt';
-import CredentialsProvider from 'next-auth/providers/credentials';
+import NextAuth, { NextAuthOptions } from "next-auth";
+import bcrypt from "bcrypt";
+import CredentialsProvider from "next-auth/providers/credentials";
 
-import { connectDb } from '../../../src/db/config/connectDb';
-import UserModel from '../../../src/db/models/UserModel';
+import { connectDb } from "../../../src/db/config/connectDb";
+import UserModel from "../../../src/db/models/UserModel";
 
-import { LoginForm } from '../../../src/types';
-import { User } from '../../../src/generated/graphql';
+import { LoginForm } from "../../../src/types";
+import { User } from "../../../src/generated/graphql";
 
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
-      name: 'credentials',
-      //@ts-ignore
+      name: "credentials",
+      // @ts-ignore
       async authorize(creds: LoginForm) {
         try {
           connectDb();
@@ -29,7 +29,7 @@ export const authOptions: NextAuthOptions = {
           }
           return user;
         } catch (error) {
-          console.error('error', error);
+          console.error("error", error);
           return null;
         }
       },
@@ -37,18 +37,19 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     session: async ({ session, token }) => {
+      const sessionObj = session;
       if (token && token.sub) {
-        delete session.user?.image;
-        session.user.userId = token?.sub;
+        delete sessionObj.user?.image;
+        sessionObj.user.userId = token?.sub;
       }
-      return Promise.resolve(session);
+      return Promise.resolve(sessionObj);
     },
   },
   session: {
-    strategy: 'jwt',
+    strategy: "jwt",
   },
   pages: {
-    signIn: '/auth/login',
+    signIn: "/auth/login",
   },
 };
 

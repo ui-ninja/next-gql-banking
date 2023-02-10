@@ -1,9 +1,9 @@
-import { Box, Grid, GridItem } from '@chakra-ui/react';
+import { Box, Grid, GridItem } from "@chakra-ui/react";
 
-import { H1 } from '../atoms/typography';
-import FeatureCard from '../molecules/FeatureCard';
+import { H1 } from "../atoms/typography";
+import FeatureCard from "../molecules/FeatureCard";
 
-import HomeConstants from '../../constants/HomeConstants';
+import HomeConstants from "../../constants/HomeConstants";
 
 export default function FeaturesList() {
   return (

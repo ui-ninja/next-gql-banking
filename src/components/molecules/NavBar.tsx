@@ -1,14 +1,14 @@
-import { Flex, Icon, Text } from '@chakra-ui/react';
-import { signOut, useSession } from 'next-auth/react';
-import NextLink from 'next/link';
-import { useRouter } from 'next/router';
-import { MdLogout } from 'react-icons/md';
+import { Flex, Icon, Text } from "@chakra-ui/react";
+import { signOut, useSession } from "next-auth/react";
+import NextLink from "next/link";
+import { useRouter } from "next/router";
+import { MdLogout } from "react-icons/md";
 
-import CommonConstants from '../../constants/CommonConstants';
-import Routes from '../../constants/Routes';
+import CommonConstants from "../../constants/CommonConstants";
+import Routes from "../../constants/Routes";
 
-import Button from '../atoms/Button';
-import Link from '../atoms/Link';
+import Button from "../atoms/Button";
+import Link from "../atoms/Link";
 
 export default function NavBar() {
   const { data: session } = useSession();
@@ -20,7 +20,7 @@ export default function NavBar() {
       flexGrow={1}
       alignItems="center"
       mt={[5, 5, 0]}
-      justifyContent={['center', 'center', 'flex-end']}
+      justifyContent={["center", "center", "flex-end"]}
     >
       {session ? (
         <>

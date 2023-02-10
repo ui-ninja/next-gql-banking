@@ -1,8 +1,8 @@
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Box, Flex, Text } from "@chakra-ui/react";
 
-import Link from 'next/link';
-import { BsBank2 } from 'react-icons/bs';
-import CommonConstants from '../../constants/CommonConstants';
+import Link from "next/link";
+import { BsBank2 } from "react-icons/bs";
+import CommonConstants from "../../constants/CommonConstants";
 
 export default function Logo() {
   return (
@@ -11,8 +11,8 @@ export default function Logo() {
       href="/"
       fontSize="3xl"
       alignItems="center"
-      flexGrow={[1, 1, 'initial']}
-      justifyContent={['center', 'center', 'initial']}
+      flexGrow={[1, 1, "initial"]}
+      justifyContent={["center", "center", "initial"]}
     >
       <Box mr={2}>
         <BsBank2 />

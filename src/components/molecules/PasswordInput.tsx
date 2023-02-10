@@ -1,23 +1,20 @@
-import { forwardRef, useState } from 'react';
+import { ForwardedRef, forwardRef, useState } from "react";
 import {
   InputGroup,
   InputProps as ChakraInputProps,
   InputRightElement,
-} from '@chakra-ui/react';
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+} from "@chakra-ui/react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
-import Button from '../atoms/Button';
-import Input from '../atoms/Input';
+import Button from "../atoms/Button";
+import Input from "../atoms/Input";
 
 type InputProps = {
-  variant?: 'primary' | 'rounded';
+  variant?: "primary" | "rounded";
 } & ChakraInputProps;
 
 const PasswordInput = forwardRef(
-  (
-    { variant = 'primary', ...props }: InputProps,
-    ref: React.ForwardedRef<HTMLInputElement>
-  ) => {
+  ({ ...props }: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
     const [show, setShow] = useState(false);
     const handleClick = () => setShow(!show);
 
@@ -26,13 +23,13 @@ const PasswordInput = forwardRef(
         <Input
           ref={ref}
           pr="4.5rem"
-          type={show ? 'text' : 'password'}
+          type={show ? "text" : "password"}
           placeholder="Enter password"
           {...props}
         />
         <InputRightElement width="4.5rem">
           <Button
-            aria-label={`${show ? 'show' : 'hide'} password`}
+            aria-label={`${show ? "show" : "hide"} password`}
             variant="outline"
             h="1.75rem"
             size="sm"
@@ -48,6 +45,6 @@ const PasswordInput = forwardRef(
   }
 );
 
-PasswordInput.displayName = 'PasswordInput';
+PasswordInput.displayName = "PasswordInput";
 
 export default PasswordInput;

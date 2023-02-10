@@ -1,3 +1,16 @@
+/* eslint-disable no-shadow */
+export enum ACCOUNT_TYPE {
+  SAVINGS = "SAVINGS",
+  "CREDIT_CARD" = "CREDIT_CARD",
+}
+
+export enum ACCOUNT_CATEGORIES {
+  REGULAR = "REGULAR",
+  PREMIUM = "PREMIUM",
+  GOLD = "GOLD",
+  PLATINUM = "PLATINUM",
+}
+
 export type RegisterForm = {
   name: string;
   email: string;
@@ -25,20 +38,8 @@ export type LoginForm = {
   password: string;
 };
 
-export enum ACCOUNT_TYPE {
-  SAVINGS = 'SAVINGS',
-  'CREDIT_CARD' = 'CREDIT_CARD',
-}
-
-export enum ACCOUNT_CATEGORIES {
-  REGULAR = 'REGULAR',
-  PREMIUM = 'PREMIUM',
-  GOLD = 'GOLD',
-  PLATINUM = 'PLATINUM',
-}
-
 export type NewAccountForm = {
   userId: string;
   type: ACCOUNT_TYPE;
-  category: ACCOUNT_CATEGORIES | '';
+  category: ACCOUNT_CATEGORIES | "";
 };

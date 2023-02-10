@@ -1,13 +1,14 @@
-import { GetServerSidePropsContext } from 'next';
-import { unstable_getServerSession } from 'next-auth';
-import { dehydrate } from 'react-query';
+import { GetServerSidePropsContext } from "next";
+// eslint-disable-next-line camelcase
+import { unstable_getServerSession } from "next-auth";
+import { dehydrate } from "react-query";
 
-import { authOptions } from '../api/auth/[...nextauth]';
+import { authOptions } from "../api/auth/[...nextauth]";
 
-import { getAccountByUserId, queryClient } from '../../src/api';
+import { getAccountByUserId, queryClient } from "../../src/api";
 
-import useAccount from '../../src/hooks/useAccount';
-import Dashboard from '../../src/components/organisms/Dashboard';
+import useAccount from "../../src/hooks/useAccount";
+import Dashboard from "../../src/components/organisms/Dashboard";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   // get user id from session
@@ -20,7 +21,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const userId = session?.user.userId;
 
   if (userId) {
-    await queryClient.prefetchQuery('account', () =>
+    await queryClient.prefetchQuery("account", () =>
       getAccountByUserId({ userId })
     );
   }

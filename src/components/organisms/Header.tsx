@@ -1,6 +1,6 @@
-import { Box, Container, Flex } from '@chakra-ui/react';
-import Logo from '../molecules/Logo';
-import NavBar from '../molecules/NavBar';
+import { Box, Container, Flex } from "@chakra-ui/react";
+import Logo from "../molecules/Logo";
+import NavBar from "../molecules/NavBar";
 
 export default function Header() {
   return (
@@ -13,7 +13,7 @@ export default function Header() {
       borderColor="gray.300"
     >
       <Container maxW="container.xl">
-        <Flex flexWrap={['wrap', 'wrap', 'nowrap']}>
+        <Flex flexWrap={["wrap", "wrap", "nowrap"]}>
           <Logo />
           <NavBar />
         </Flex>

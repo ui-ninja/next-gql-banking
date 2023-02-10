@@ -1,19 +1,20 @@
-import { dehydrate, useMutation } from 'react-query';
-import { GetServerSidePropsContext } from 'next';
-import { unstable_getServerSession } from 'next-auth';
-import { useRouter } from 'next/router';
-import { Text, useToast } from '@chakra-ui/react';
+import { dehydrate, useMutation } from "react-query";
+import { GetServerSidePropsContext } from "next";
+// eslint-disable-next-line camelcase
+import { unstable_getServerSession } from "next-auth";
+import { useRouter } from "next/router";
+import { Text, useToast } from "@chakra-ui/react";
 
-import { addAccount, getUser, queryClient } from '../../src/api';
-import { authOptions } from '../api/auth/[...nextauth]';
+import { addAccount, getUser, queryClient } from "../../src/api";
+import { authOptions } from "../api/auth/[...nextauth]";
 
-import OpenNewAccountForm from '../../src/components/organisms/OpenNewAccountForm';
+import OpenNewAccountForm from "../../src/components/organisms/OpenNewAccountForm";
 
-import useUser from '../../src/hooks/useUser';
+import useUser from "../../src/hooks/useUser";
 
-import { NewAccountForm } from '../../src/types';
-import OpenNewAccountConstants from '../../src/constants/OpenNewAccount';
-import Routes from '../../src/constants/Routes';
+import { NewAccountForm } from "../../src/types";
+import OpenNewAccountConstants from "../../src/constants/OpenNewAccount";
+import Routes from "../../src/constants/Routes";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   // get user id from session
@@ -26,7 +27,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const emailAddress = session?.user.email;
 
   if (emailAddress) {
-    await queryClient.prefetchQuery('user', () => getUser({ emailAddress }));
+    await queryClient.prefetchQuery("user", () => getUser({ emailAddress }));
   }
 
   return {
@@ -48,17 +49,17 @@ export default function OpenNewAccount({
   const router = useRouter();
 
   const createAccount = useMutation(
-    (data: NewAccountForm) =>
+    (result: NewAccountForm) =>
       addAccount({
-        newAccountData: data,
+        newAccountData: result,
       }),
     {
-      onSuccess: async (res) => {
+      onSuccess: async () => {
         toast({
           title: OpenNewAccountConstants.ACCOUNT_CREATED_SUCCESS_TOAST.TITLE,
           description:
             OpenNewAccountConstants.ACCOUNT_CREATED_SUCCESS_TOAST.DESCRIPTION,
-          status: 'success',
+          status: "success",
         });
         router.push(Routes.DASHBOARD);
       },
@@ -67,14 +68,14 @@ export default function OpenNewAccount({
           title: OpenNewAccountConstants.ACCOUNT_CREATED_ERROR_TOAST.TITLE,
           description:
             OpenNewAccountConstants.ACCOUNT_CREATED_ERROR_TOAST.DESCRIPTION,
-          status: 'error',
+          status: "error",
         });
       },
     }
   );
 
-  const handleAccountCreation = (data: NewAccountForm) => {
-    return createAccount.mutate(data);
+  const handleAccountCreation = (res: NewAccountForm) => {
+    return createAccount.mutate(res);
   };
 
   if (isError) {

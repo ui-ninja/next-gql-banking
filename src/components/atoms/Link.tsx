@@ -1,4 +1,4 @@
-import { Link as ChakraLink, LinkProps } from '@chakra-ui/react';
+import { Link as ChakraLink, LinkProps } from "@chakra-ui/react";
 
 export default function Link({
   children,
@@ -6,7 +6,7 @@ export default function Link({
   ...rest
 }: LinkProps & { isActive?: boolean }) {
   return (
-    <ChakraLink {...rest} textDecoration={isActive ? 'underline' : ''}>
+    <ChakraLink {...rest} textDecoration={isActive ? "underline" : ""}>
       {children}
     </ChakraLink>
   );

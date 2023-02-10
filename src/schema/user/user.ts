@@ -1,5 +1,5 @@
-import { Length, MaxLength } from 'class-validator';
-import { Field, ObjectType, ID, InputType } from 'type-graphql';
+import { Length, MaxLength } from "class-validator";
+import { Field, ObjectType, ID, InputType } from "type-graphql";
 
 @ObjectType()
 export class User {

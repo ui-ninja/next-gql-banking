@@ -1,11 +1,12 @@
-import { Box, Flex, Icon, Text } from '@chakra-ui/react';
-import Link from '../atoms/Link';
-import { H4 } from '../atoms/typography';
+import { Box, Flex, Icon, Text } from "@chakra-ui/react";
+import Link from "../atoms/Link";
+import { H4 } from "../atoms/typography";
 
 type Props = {
   heading: string;
   description: string;
   link: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon: any;
 };
 

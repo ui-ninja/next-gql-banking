@@ -1,4 +1,4 @@
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, useForm } from "react-hook-form";
 import {
   Box,
   Divider,
@@ -6,18 +6,18 @@ import {
   FormErrorMessage,
   FormLabel,
   Textarea,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import { H1 } from '../../../src/components/atoms/typography';
-import Input from '../../../src/components/atoms/Input';
-import Button from '../../../src/components/atoms/Button';
-import Select from '../../../src/components/atoms/Select';
-import PasswordInput from '../../../src/components/molecules/PasswordInput';
+import { H1 } from "../atoms/typography";
+import Input from "../atoms/Input";
+import Button from "../atoms/Button";
+import Select from "../atoms/Select";
+import PasswordInput from "../molecules/PasswordInput";
 
-import CommonConstants from '../../constants/CommonConstants';
+import CommonConstants from "../../constants/CommonConstants";
 
-import { AddNewUserMutation, RegisterForm } from '../../../src/types';
-import RegisterConstants from '../../constants/RegisterConstants';
+import { AddNewUserMutation, RegisterForm } from "../../types";
+import RegisterConstants from "../../constants/RegisterConstants";
 
 export default function RegisterInputForm({
   onSignup,
@@ -29,16 +29,16 @@ export default function RegisterInputForm({
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<RegisterForm>({
-    mode: 'onChange',
+    mode: "onChange",
     defaultValues: {
-      name: '',
-      email: '',
-      password: '',
-      phone: '',
-      residence: '',
-      occupation: '',
-      income: '',
-      govtId: '',
+      name: "",
+      email: "",
+      password: "",
+      phone: "",
+      residence: "",
+      occupation: "",
+      income: "",
+      govtId: "",
     },
   });
 
@@ -52,7 +52,7 @@ export default function RegisterInputForm({
   };
 
   return (
-    <Box maxW={'sm'} margin="0 auto">
+    <Box maxW="sm" margin="0 auto">
       <H1>{RegisterConstants.PAGE_HEADING}</H1>
 
       <Divider mt="2" mb="10" borderColor="black" />
