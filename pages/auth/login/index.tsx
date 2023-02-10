@@ -39,8 +39,6 @@ export default function Login({
         title: CommonConstants.ERROR_OCCURRED,
         description: CommonConstants.USERNAME_OR_PASSWORD_INVALID,
         status: 'error',
-        duration: 5000,
-        isClosable: true,
       });
     }
   };

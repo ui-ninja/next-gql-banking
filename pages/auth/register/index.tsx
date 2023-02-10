@@ -30,8 +30,6 @@ export default function Register() {
             title: CommonConstants.ACCOUNT_CREATED,
             description: CommonConstants.REDIRECT_TO_DASHBOARD,
             status: 'success',
-            duration: 5000,
-            isClosable: true,
           });
           // sign in user with nextAuth
           const status = await signIn('credentials', {
@@ -56,7 +54,6 @@ export default function Register() {
             ? CommonConstants.EMAIL_ALREADY_IN_USE
             : CommonConstants.SIGNUP_FAILED,
           status: 'error',
-          duration: 9000,
           isClosable: true,
         });
       },

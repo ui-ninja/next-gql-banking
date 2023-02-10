@@ -59,8 +59,6 @@ export default function OpenNewAccount({
           description:
             OpenNewAccountConstants.ACCOUNT_CREATED_SUCCESS_TOAST.DESCRIPTION,
           status: 'success',
-          duration: 5000,
-          isClosable: true,
         });
         router.push(Routes.DASHBOARD);
       },
@@ -70,8 +68,6 @@ export default function OpenNewAccount({
           description:
             OpenNewAccountConstants.ACCOUNT_CREATED_ERROR_TOAST.DESCRIPTION,
           status: 'error',
-          duration: 5000,
-          isClosable: true,
         });
       },
     }
