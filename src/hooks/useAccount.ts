@@ -4,7 +4,10 @@ import { getAccountByUserId } from '../api';
 export default function useAccount(userId: string) {
   const { data, isLoading, isError, error, refetch } = useQuery(
     ['account'],
-    () => getAccountByUserId({ userId })
+    () => getAccountByUserId({ userId }),
+    {
+      refetchOnMount: 'always',
+    }
   );
 
   return {

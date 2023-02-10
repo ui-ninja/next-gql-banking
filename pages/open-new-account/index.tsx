@@ -42,7 +42,7 @@ export default function OpenNewAccount({
 }: {
   emailAddress: string;
 }) {
-  const { data, isFetching, isError } = useUser(emailAddress);
+  const { data, isLoading, isError } = useUser(emailAddress);
 
   const toast = useToast();
   const router = useRouter();
@@ -85,7 +85,7 @@ export default function OpenNewAccount({
     return <Text>{OpenNewAccountConstants.ERROR_LOADING_DATA}</Text>;
   }
 
-  if (isFetching) {
+  if (isLoading) {
     return <Text>{OpenNewAccountConstants.LOADING_DATA}</Text>;
   }
 
