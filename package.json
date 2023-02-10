@@ -73,7 +73,6 @@
     "jest-environment-jsdom": "^29.3.1",
     "lint-staged": "^13.1.1",
     "next-router-mock": "^0.9.1-beta.0",
-    "nock": "^13.3.0",
     "prettier": "^2.8.4"
   }
 }
